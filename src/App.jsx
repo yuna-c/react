@@ -1,13 +1,16 @@
+// src/About.jsx
+import Layout from './components/Layout.jsx';
 import './App.scss';
 
-const User = (props) => {
-	console.log(`props =>`, props);
-	console.log(`props =>`, { ...props });
-	return <div>유저님 {props.children}</div>;
-};
-function App() {
-	return <User abc='124'>안녕하세요!!!!!!!!!</User>;
-	// User 컴포넌트 안의 값이 chidren안쪽으로 들어간다
-}
+// children
+// : props와 비슷하게 부모에서 자식 컴포넌트로 값을 보내주는 방법
+// : layout 컴포넌트 만들 때 주로 사용
 
+function App() {
+	return (
+		<Layout>
+			<div>여긴 App의 컨텐츠가 들어갑니다.</div>
+		</Layout>
+	);
+}
 export default App;
