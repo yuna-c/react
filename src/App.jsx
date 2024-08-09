@@ -1,5 +1,5 @@
 // src/About.jsx
-import Layout from './components/Layout.jsx';
+import Todo from './components/Todo.jsx';
 import './App.scss';
 
 // children
@@ -7,10 +7,12 @@ import './App.scss';
 // : layout 컴포넌트 만들 때 주로 사용
 
 function App() {
+	const title = '제목입니다';
 	return (
-		<Layout>
-			<div>여긴 App의 컨텐츠가 들어갑니다.</div>
-		</Layout>
+		<>
+			<h1>추출 테스트</h1>
+			<Todo title={title} />
+		</>
 	);
 }
 export default App;
