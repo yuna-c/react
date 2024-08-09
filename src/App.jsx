@@ -6,54 +6,63 @@ const App = () => {
 export default App;
 
 /*
-1.Component
-1-1. 리액트의 핵심
-리액트에서 개발할 모든 애플리케이션 : 컴포넌트 조각으로 구성
-컴포넌트 UI 구축 작업 단순화
-면의 특정 부분이 어떻게 생길지 정하는 선언체
+1. 브라우저가 렌더링 되는 원리
+1-1. 가상돔(Virtual DOM)
 
-1-2. 명령형 프로그래밍 vs 선언형 프로그래밍
+1-2. DOM
+페이지 : 문서(document)
+페이지를 이루는 컴포넌트 : 엘리먼트(element)
+tree 형태(= DOM TREE)
+트리의 요소 하나하나 : 노드
+API : HTML 요소에 접근해서 수정할 수 있는 함수
 
-: DOM(명령형 프로그래밍)
-// Hello, World! 화면에 출력하기
-// 순수 javaScript 명령형 코드
-const root = document.getElementById('root'); 
-const header = document.createElement('h1'); 
-const headerContent = document.createTextNode(
-	'Hello, World!'
-);
+1-3. DOM 사용 예시
 
-header.appendChild(headerContent); 
-root.appendChild(header);
+// id가 demo인 녀석을 찾아, 'Hello World!'를 대입해줘.
+document.getElementById("demo").innerHTML = "Hello World!";
 
-: 리액트(선언형 프로그래밍)
-// React 코드 (선언적인)
-const header = <h1>Hello World</h1>; // jsx
-ReactDOM.render(header, document.getElementById('root'));
+// p 태그들을 모두 가져와서 element 변수에 저장해줘
+const element = document.getElementsByTagName("p");
+
+// 클래스 이름이 intro인 모든 요소를 가져와서 x 변수에 저장해줘
+const x = document.getElementsByClassName("intro");
 
 
-2. 렌더링
+2. 가상DOM(Virtual DOM)
 
-2-1. 기본개념
-컴포넌트가 현재 props와 state의 상태에 기초하여 UI를 어떻게 구성할지 컴포넌트에게 요청하는 작업
+2-1. 가상DOM
+가상DOM을 이용해서 실제DOM을 변경 : 복사본 형태
+객체(object) 형태로 메모리에 저장
+실제 DOM을 조작하는 것 보다 훨씬 더 빠르게 조작
 
-* 렌더링 일으키는 것은 (**triggering**)- UI를 주문하고 주방으로 전달하는 것
-* 렌더링한다는 것은 (**rendering**)- 주방에서 컴포넌트가 UI를 만들고 준비하는 것
-* 렌더링 결과는 실제 DOM에 커밋한다는 것은 (**commit**) - 리액트가 준비된 UI를 손님 테이블에 올려놓는 것
+2-2. DOM 조작 과정
+* 만일 인스타그램의 좋아요 버튼을 누른다면 빨간색 하트에 해당되는 엘리먼트 DOM 요소가 갱신
 
-2-2. 렌더링 (렌더링 발생하는 경우)
+**[STEP 1]**
+이 과정에서 리액트는 항상 **`2가지 버전의 가상DOM`**을 가지고 있음
 
-* 첫 리액트 앱을 실행했을 때
-* 현재 리액트 내부에 어떤 상태(state)에 변경이 발생했을 때. 
-	- 컴포넌트 내부 state가 변경되었을 때
-	- 컴포넌트에 새로운 props가 들어올 때,
-	- 상위 부모 컴포넌트에서 위에 두 이유로 렌더링이 발생했을 때
+1. 화면이 갱신되기 **전** 구조가 담겨있는 **가상DOM 객체**
+2. 화면 갱신 **후** 보여야 할 **가상 DOM 객체**
 
+리액트는 **`state`**가 변경돼야만 리렌더링이 되죠. 그 때, 바로 2번에 해당되는 **가상 DOM을 만듬**
 
-3. 리렌더링
-첫 렌더링을 끝난 이후에 추가로 렌더링을 트리거 하려면 상태를 변경(useState)
+**[STEP 2 : diffing]**
+**state**가 변경되면 2번에서 생성된 가상돔과 1번에서 이미 갖고있었던 **가상돔을 비교**해서 어느 부분(엘리먼트)에서 변화가 일어났는지를 상당히 빠르게 파악함
 
+**[STEP 3 : 재조정(reconciliation)]**
+파악이 다 끝나면, 변경이 일어난 **그 부분만** 실제 `DOM에 적용`시킴. 적용시킬 때는, 한건 한건 적용시키는 것이 아니라, 변경사항을 모두 모아 한 번만 적용을 시킴**(Batch Update 🔥)**
 
-4. 브라우저 렌더링(페인팅)
- 렌더링이 완료되고 React가 DOM을 업데이트한 후 브라우저는 화면을 그림
+2-3. Batch Update
+state를 batch 방법으로 update 한다는 것은 변경된 모든 엘리먼트를 한꺼번에 반영할 수 있는 방법
+
+3. 브라우저 렌더링(페인팅)
+3-1. 렌더링 순서
+**가상 DOM 생성**: React는 컴포넌트의 렌더 함수를 실행하여 가상 DOM을 새로 생성합니다.
+**차이 비교 (Diffing)**: 새로운 가상 DOM과 이전 가상 DOM을 비교하여 실제 DOM을 업데이트해야 할 부분을 찾습니다.
+**배치 업데이트 (Reconciliation)**: 변경된 부분만을 효율적으로 실제 DOM에 반영합니다.
+
+3-2. 브라우저 렌더링(페인팅)
+1. **스타일 계산**: HTML과 CSS를 분석하여 각 요소의 스타일을 계산
+2. **레이아웃**: 각 요소의 위치와 크기를 계산
+3. **페인팅**: 레이아웃 단계에서 계산된 정보를 바탕으로 요소를 화면에 그림
 */
