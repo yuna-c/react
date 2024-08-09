@@ -8,24 +8,20 @@ import './styles/App.scss';
 	변수를 변경하는 함수 : function(){}
 ]
 */
+// 자주 쓰이는 곳 :  onChange, onClick
 
 const App = () => {
-	const [toggle, setToggle] = useState(false);
-	const [name, setName] = useState('나나');
-	const handleChangeName = () => {
-		setName('최나나');
-	};
-	const handleChangeToggle = () => {
-		setToggle(!toggle);
-	};
+	const [text, setText] = useState('');
 	return (
 		<>
-			<h1>React State</h1>
-			<button onClick={handleChangeToggle}>최르순이로!!</button>
-			{toggle ? '르순이' : '최르순이'}
+			<input
+				// 계속해서 State 변경
+				onChange={(e) => {
+					setText(e.target.value);
+				}}
+			/>
 			<br />
-			<button onClick={handleChangeName}>최나나로!</button>
-			{name}
+			{text}
 		</>
 	);
 };
