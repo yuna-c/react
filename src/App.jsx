@@ -24,10 +24,30 @@ const App = () => {
 		{ id: new Date().getTime() + 3, age: 39, name: '김사랑' },
 		{ id: new Date().getTime() + 4, age: 29, name: '유나' },
 	]);
+
 	console.log(users);
+	const [age, setAge] = useState(0);
+	const [name, setName] = useState('');
+	const onAddAge = (e) => {
+		setAge(e.target.value);
+	};
+	const onAddName = (e) => {
+		setName(e.target.value);
+	};
 
 	return (
 		<>
+			<input type='number' value={age} onChange={onAddAge} />
+			<input type='text' value={name} onChange={onAddName} />
+			<button
+				onClick={() => {
+					// users state에 한 객체가 추가되면 됨
+					console.log('age => ', age);
+					console.log('name => ', name);
+				}}
+			>
+				add
+			</button>
 			<ul style={styles}>
 				{users.map((user, idx) => (
 					<User id={idx} key={user.id} user={user} />
