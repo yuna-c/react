@@ -1,5 +1,3 @@
-// props 빨간줄 해제 1
-/* eslint-disable */
 import './Card.scss';
 
 export default function Card(props) {
