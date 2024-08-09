@@ -8,16 +8,25 @@ import './styles/App.scss';
 	변수를 변경하는 함수 : function(){}
 ]
 */
-function App() {
-	let [name, setName] = useState('르순이');
+
+const App = () => {
+	const [toggle, setToggle] = useState(false);
+	const [name, setName] = useState('나나');
 	const handleChangeName = () => {
-		setName('최르순');
+		setName('최나나');
+	};
+	const handleChangeToggle = () => {
+		setToggle(!toggle);
 	};
 	return (
 		<>
 			<h1>React State</h1>
-			<button onClick={handleChangeName}>{name}</button>
+			<button onClick={handleChangeToggle}>최르순이로!!</button>
+			{toggle ? '르순이' : '최르순이'}
+			<br />
+			<button onClick={handleChangeName}>최나나로!</button>
+			{name}
 		</>
 	);
-}
+};
 export default App;
