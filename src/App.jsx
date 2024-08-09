@@ -2,10 +2,10 @@ import './App.scss';
 
 function App() {
 	return (
-		<div>
-			<input type='text' />
-			<button></button>
-		</div>
+		<>
+			<div>1</div>
+			<div>2</div>
+		</>
 	);
 }
 
