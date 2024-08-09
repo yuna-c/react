@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import './styles/App.scss';
 
-// refactoring
-// : 컴포넌트 분리
-// : 반복되는 컴포넌트 처리하는
+// age가 25세 이상인 user은 제외하고 렌더링 하기
 
 const App = () => {
 	const styles = {
@@ -22,6 +20,8 @@ const App = () => {
 		{ id: new Date().getTime() + 2, age: 32, name: '수지' },
 		{ id: new Date().getTime() + 3, age: 39, name: '김사랑' },
 		{ id: new Date().getTime() + 4, age: 29, name: '유나' },
+		{ id: new Date().getTime() + 5, age: 16, name: '장원영' },
+		{ id: new Date().getTime() + 5, age: 21, name: '김유정' },
 	]);
 
 	console.log(users);
@@ -68,9 +68,23 @@ const App = () => {
 				add
 			</Button>
 			<ul style={styles}>
-				{users.map((user, idx) => (
-					<User id={idx} key={user.id} user={user} deleteUserHandler={deleteUserHandler} />
-				))}
+				{/* 방법 1.
+				{users.map((user, idx) => {
+					if (user.age < 25) {
+						return <User id={idx} key={user.id} user={user} deleteUserHandler={deleteUserHandler} />;
+					} else {
+						return null;
+					}
+				})}
+			*/}
+				{/* 방법 2. */}
+				{users
+					.filter((u) => {
+						return u.age < 25;
+					})
+					.map((user, idx) => (
+						<User id={idx} key={user.id} user={user} deleteUserHandler={deleteUserHandler} />
+					))}
 			</ul>
 		</>
 	);
