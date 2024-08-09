@@ -73,9 +73,11 @@ const User = ({ user, idx }) => {
 		backgroundColor: '#9adce6',
 	};
 
+	const { age, name } = user;
+
 	return (
 		<li id={idx} key={user.id} style={boxStyle}>
-			{user.name} - {user.age}살
+			{name} - {age}살
 		</li>
 	);
 };
