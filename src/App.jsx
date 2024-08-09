@@ -7,10 +7,7 @@ import './styles/App.scss';
 
 const App = () => {
 	const styles = {
-		minHeight: 'calc( 100vh - 10rem)',
 		listStyle: 'none',
-		alignItems: 'center',
-		justifyContent: 'center',
 		display: 'flex',
 		gap: '20px',
 	};
@@ -44,6 +41,13 @@ const App = () => {
 					// users state에 한 객체가 추가되면 됨
 					console.log('age => ', age);
 					console.log('name => ', name);
+					const newUser = {
+						id: new Date().getTime(),
+						age: age,
+						name: name,
+					};
+					console.log(`newUser => `, newUser);
+					setUsers([...users, newUser]);
 				}}
 			>
 				add
