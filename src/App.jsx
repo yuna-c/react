@@ -12,16 +12,21 @@ import './styles/App.scss';
 
 const App = () => {
 	const [text, setText] = useState('');
+	const handleInputChange = (e) => {
+		// 계속해서 State 변경
+		// 이런 구성 필요한 이유 : 다른 곳에 출력할 수도 있어서
+		console.log(text);
+		setText(e.target.value);
+	};
 	return (
 		<>
-			<input
-				// 계속해서 State 변경
-				onChange={(e) => {
-					setText(e.target.value);
-				}}
-			/>
+			<input type='text' onChange={handleInputChange} value={text} />
+			{/* 
+			input태그는 항상 state(value)와 onChange와 페어로 묶는다 
+			value 묶었을 시 ? 제어 컴포넌트(⭐) : 비 제어 컴포넌트
+			*/}
 			<br />
-			{text}
+			{text} {/* 변수화 시켜서 다른데서 쓰임 */}
 		</>
 	);
 };
