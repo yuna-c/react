@@ -1,8 +1,18 @@
+// props 빨간줄 해제 1
+/* eslint-disable */
+
+// props 빨간줄 해제 2
+// 설치 : npm i prop-types, yarn add prop-types
+// import PropType from "prop-types";
+// Header.propTypes={
+// 	title:PropTypes.string.isRequired,
+// }
+
 import './App.scss';
 
-// div안에서 { } 를 쓰고 props.motherName을 넣어보세요.
 function Child(props) {
 	const name = '르탄';
+	// https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
 	return <div>{`우리 엄마는 ${props.motherName}, 나는 ${props.motherName}의 아들 ${name}`}</div>;
 }
 
