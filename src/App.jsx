@@ -61,7 +61,7 @@ const App = () => {
 	);
 };
 
-const User = (props) => {
+const User = ({ user, idx }) => {
 	const boxStyle = {
 		width: '100px',
 		height: '100px',
@@ -74,8 +74,8 @@ const User = (props) => {
 	};
 
 	return (
-		<li id={props.idx} key={props.user.id} style={boxStyle}>
-			{props.user.name}-{props.user.age}살
+		<li id={idx} key={user.id} style={boxStyle}>
+			{user.name} - {user.age}살
 		</li>
 	);
 };
