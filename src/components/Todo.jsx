@@ -1,4 +1,4 @@
-const Todo = ({ title }) => {
+const Todo = ({ title = '미제출' }) => {
 	// 1차 : (props), console.log(`props=>`, props); // 자식으로 title 내려줌
 	// 2차 : (props), const { title } = props;
 	// 3차 : { title }

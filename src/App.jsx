@@ -10,7 +10,7 @@ function App() {
 	const title = '제목입니다';
 	return (
 		<>
-			<h1>추출 테스트</h1>
+			<h1>추출테 스트</h1>
 			<Todo title={title} />
 		</>
 	);
