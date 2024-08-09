@@ -7,6 +7,8 @@ import './styles/App.scss';
 
 const App = () => {
 	const styles = {
+		margin: '30px 0 0 0 ',
+		padding: '0',
 		listStyle: 'none',
 		display: 'flex',
 		gap: '20px',
@@ -25,36 +27,47 @@ const App = () => {
 	console.log(users);
 	const [age, setAge] = useState(0);
 	const [name, setName] = useState('');
-	const onAddAge = (e) => {
+
+	const AddAge = (e) => {
 		setAge(e.target.value);
 	};
-	const onAddName = (e) => {
+
+	const AddName = (e) => {
 		setName(e.target.value);
+	};
+
+	const AddUserHandler = () => {
+		// users state에 한 객체가 추가되면 됨
+		console.log('age => ', age);
+		console.log('name => ', name);
+		const newUser = {
+			id: new Date().getTime(),
+			age: Number(age), // 문자로 입력이 되기 때문에 형변환
+			name: name,
+		};
+
+		// 새로운 유저 배열에 담기
+		setUsers([...users, newUser]);
+		console.log(`newUser => `, newUser);
+	};
+
+	const deleteUserHandler = (id) => {
+		// 삭제할 대상 id
+		const deletedUser = users.filter((user) => user.id != id);
+		// 유저의 id가 인풋으로 받은 id와 동일하지 않으면 삭제를 해줘라
+
+		// console.log(deletedUser);
+		setUsers(deletedUser);
 	};
 
 	return (
 		<>
-			<input type='number' value={age} onChange={onAddAge} />
-			<input type='text' value={name} onChange={onAddName} />
-			<button
-				onClick={() => {
-					// users state에 한 객체가 추가되면 됨
-					console.log('age => ', age);
-					console.log('name => ', name);
-					const newUser = {
-						id: new Date().getTime(),
-						age: age,
-						name: name,
-					};
-					console.log(`newUser => `, newUser);
-					setUsers([...users, newUser]);
-				}}
-			>
-				add
-			</button>
+			<input type='number' value={age} onChange={AddAge} />
+			<input type='text' value={name} onChange={AddName} />
+			<button onClick={AddUserHandler}>add</button>
 			<ul style={styles}>
 				{users.map((user, idx) => (
-					<User id={idx} key={user.id} user={user} />
+					<User id={idx} key={user.id} user={user} deleteUserHandler={deleteUserHandler} />
 				))}
 			</ul>
 		</>
@@ -62,23 +75,30 @@ const App = () => {
 };
 
 // User 컴포넌트를 분리해서 구현
-const User = ({ user, idx }) => {
+const User = ({ user, idx, deleteUserHandler }) => {
 	const boxStyle = {
 		width: '100px',
 		height: '100px',
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
+		flexDirection: 'column',
 		border: '1px solid #000',
 		borderRadius: '3px',
 		backgroundColor: '#ceebef',
 	};
 
-	const { age, name } = user;
+	const { age, name, id } = user;
 
 	return (
-		<li id={idx} key={user.id} style={boxStyle}>
-			{name} <br /> {age}살
+		<li id={idx} key={id} style={boxStyle}>
+			<p>
+				{name} <br /> {age}살
+			</p>
+			<div>
+				{/* 실행이 될 때 user가 가지고 있는 id가 있어야 한다 */}
+				<button onClick={() => deleteUserHandler(id)}>삭제</button>
+			</div>
 		</li>
 	);
 };
