@@ -5,6 +5,9 @@ function GrandFather() {
 	return <Mother name={name} />;
 }
 
+// prop drilling
+// : 데이터를 계속 내려주는 현상
+// : redux에서는 피해야함
 function Mother(props) {
 	const name = props.name;
 	return <Child name={name} />;
