@@ -10,17 +10,13 @@ import './styles/App.scss';
 */
 function App() {
 	let [name, setName] = useState('르순이');
-
+	const handleChangeName = () => {
+		setName('최르순');
+	};
 	return (
 		<>
 			<h1>React State</h1>
-			<button
-				onClick={() => {
-					setName('최르순');
-				}}
-			>
-				{name}
-			</button>
+			<button onClick={handleChangeName}>{name}</button>
 		</>
 	);
 }
