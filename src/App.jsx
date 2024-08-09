@@ -10,19 +10,19 @@
 
 import './App.scss';
 
-function Child(props) {
-	const name = '르탄';
-	// https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
-	return <div>{`우리 엄마는 ${props.motherName}, 나는 ${props.motherName}의 아들 ${name}`}</div>;
-}
-
-function Mother() {
-	const name = '홍부인';
-	return <Child motherName={name} />;
-}
-
 function GrandFather() {
-	return <Mother />;
+	const name = '김할아범';
+	return <Mother name={name} />;
+}
+
+function Mother(props) {
+	const name = props.name;
+	return <Child name={name} />;
+}
+
+function Child(props) {
+	const name = props.name;
+	return <div>{name}의 손자 르탄이</div>;
 }
 
 function App() {
