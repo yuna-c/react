@@ -1,17 +1,26 @@
-// src/About.jsx
-import Todo from './components/Todo.jsx';
-import './App.scss';
-
-// children
-// : props와 비슷하게 부모에서 자식 컴포넌트로 값을 보내주는 방법
-// : layout 컴포넌트 만들 때 주로 사용
-
+import { useState } from 'react';
+import './styles/App.scss';
+// State(hook)
+// : State란 컴포넌트 내부에서 변경 될 수 있는 값(렌더링)
+/*
+[ // Array의 구조분해 할당
+	변수 : '르순이',
+	변수를 변경하는 함수 : function(){}
+]
+*/
 function App() {
-	const title = '제목입니다';
+	let [name, setName] = useState('르순이');
+
 	return (
 		<>
-			<h1>추출테 스트</h1>
-			<Todo title={title} />
+			<h1>React State</h1>
+			<button
+				onClick={() => {
+					setName('최르순');
+				}}
+			>
+				{name}
+			</button>
 		</>
 	);
 }
