@@ -1,32 +1,20 @@
 import { useState } from 'react';
 import './styles/App.scss';
-// State(hook)
-// : State란 컴포넌트 내부에서 변경 될 수 있는 값(렌더링)
-/*
-[ // Array의 구조분해 할당
-	변수 : '르순이',
-	변수를 변경하는 함수 : function(){}
-]
-*/
-// 자주 쓰이는 곳 :  onChange, onClick
 
+// 불변성 : 불변성이란 메모리에 있는 값을 변경할 수 없는 것
+// 참조형 변수(객체,배열,함수) 불변성 X
+// 리렌더링 여부 : state의 변화
+// 리액트에서 원시데이터가 아닌 데이터를 수정할 때 불변성을 지켜주지 않고, 직접 수정을 가하면 값은 바뀌지만 메모리주소는 변함이 없게 되는것
 const App = () => {
-	const [text, setText] = useState('');
-	const handleInputChange = (e) => {
-		// 계속해서 State 변경
-		// 이런 구성 필요한 이유 : 다른 곳에 출력할 수도 있어서
-		console.log(text);
-		setText(e.target.value);
+	const [dogs, setDogs] = useState(['말티즈']);
+	const onClickHandler = () => {
+		// dogs.push('시고르자브종'); 값이 바꼈다고 인지를 못함
+		setDogs([...dogs, '시고르자브종']); //배열을 새로 만들고 강아지를 넣어줌
+		console.log(dogs);
 	};
 	return (
 		<>
-			<input type='text' onChange={handleInputChange} value={text} />
-			{/* 
-			input태그는 항상 state(value)와 onChange와 페어로 묶는다 
-			value 묶었을 시 ? 제어 컴포넌트(⭐) : 비 제어 컴포넌트
-			*/}
-			<br />
-			{text} {/* 변수화 시켜서 다른데서 쓰임 */}
+			<button onClick={onClickHandler}>버튼</button>
 		</>
 	);
 };
