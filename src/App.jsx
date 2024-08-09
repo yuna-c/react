@@ -64,7 +64,7 @@ const App = () => {
 		<>
 			<input type='number' value={age} onChange={AddAge} />
 			<input type='text' value={name} onChange={AddName} />
-			<button onClick={AddUserHandler}>add</button>
+			<Button onClick={AddUserHandler}>add</Button>
 			<ul style={styles}>
 				{users.map((user, idx) => (
 					<User id={idx} key={user.id} user={user} deleteUserHandler={deleteUserHandler} />
@@ -97,10 +97,14 @@ const User = ({ user, idx, deleteUserHandler }) => {
 			</p>
 			<div>
 				{/* 실행이 될 때 user가 가지고 있는 id가 있어야 한다 */}
-				<button onClick={() => deleteUserHandler(id)}>삭제</button>
+				<Button onClick={() => deleteUserHandler(id)}>삭제</Button>
 			</div>
 		</li>
 	);
+};
+
+const Button = ({ children, onClick }) => {
+	return <button onClick={onClick}>{children}</button>;
 };
 
 export default App;
