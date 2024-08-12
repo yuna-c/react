@@ -1,0 +1,53 @@
+@import 'reset';
+@import 'variables.scss';
+
+#wrap {
+  min-width: 1000px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px #0000001a;
+  background-color: var(--bgColor);
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    .form-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .input-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        input {
+          max-width: 95%;
+          padding: 5px 10px;
+          border: 1px solid #0000001a;
+          border-radius: 5px;
+        }
+      }
+
+      .button-group {
+        > button {
+          width: 80px;
+          margin: 0 5px;
+          padding: 5px 10px;
+          border: 1px solid #0000001a;
+          border-radius: 5px;
+          color: var(--bgColor);
+          background-color: var(--baseColor);
+        }
+      }
+    }
+  }
+}

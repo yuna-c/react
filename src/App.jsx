@@ -1,3 +1,7 @@
+import Nodata from './components/nodata/Nodata';
+import Header from './components/header/Header';
+import Button from './components/button/Button';
+import Table from './components/table/Table';
 import { useState } from 'react';
 import './styles/App.scss';
 
@@ -10,6 +14,8 @@ function App() {
   const [countries, setCountries] = useState([]);
   // const [storage, setStorage] = useState(() => {
   //   localStorage.setItem('country', JSON.stringify(countries));
+  // 빈배열이 스토리지 있으면 컨트리스를 useState 안에 넣고
+  // 만약 빈배열이면 세팅값을 먼저 주기 || []
   //   // console.log(countries, localStorage.setItem('country', JSON.stringify(countries)));
   // });
 
@@ -48,16 +54,13 @@ function App() {
     } else {
       // 1) sort 처리를 먼저( 추가 가능 상태 )
       const sortedArr = [...countries, newCountries].sort((a, b) => {
-        if (a.gold === b.gold) {
-          return b.gold + b.silver + b.bronze - (a.gold + a.silver + a.bronze);
-        } else {
-          return b.gold - a.gold;
-        }
+        if (a.gold === b.gold) return b.gold + b.silver + b.bronze - (a.gold + a.silver + a.bronze);
+        else return b.gold - a.gold;
       });
       // 2) setCounties
       setCountries(sortedArr);
 
-      // 3)
+      // 3) localStorage
       localStorage.setItem('country', JSON.stringify(sortedArr));
     }
 
@@ -75,23 +78,29 @@ function App() {
       // 업데이트 할 때도 숫자화 처리
       el.country === country ? { ...el, gold: Number(gold), silver: Number(silver), bronze: Number(bronze) } : el
     );
-    if (!country) alert('국가를 입력해 주세요.');
-    else if (!findCountry) alert('등록 되어 있지 않은 국가입니다.');
-    else setCountries(updateCounrty);
+
+    if (!country) {
+      alert('국가명을 입력해 주세요.');
+      return;
+    } else if (!findCountry) {
+      alert('등록 되어 있지 않은 국가입니다.');
+      return;
+    } else {
+      return setCountries(updateCounrty);
+    }
   };
 
+  // 테이블에 이벤트가 안 먹는 이유는? 테이블 안에..
+  // rowClick?
+  // client:176 [hmr] Failed to reload /src/components/table/Table.jsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
   const onHandleDelete = () => {
     const deletedCounrty = countries.filter((el) => el.country != country);
     setCountries(deletedCounrty);
   };
 
-  // console.log(storage, setStorage);
-
   return (
     <div id="wrap">
-      <header className="header">
-        <h1>2024 파리 올림픽</h1>
-      </header>
+      <Header />
       <main className="main">
         <form className="form-group" onSubmit={onHandleSubmit}>
           <div className="input-field">
@@ -100,69 +109,23 @@ function App() {
           </div>
           <div className="input-field">
             <label>금메달</label>
-            <input type="number" name="gold" value={gold} onChange={onAddGold} />
+            <input type="number" placeholder="금메달 개수" name="gold" value={gold} onChange={onAddGold} />
           </div>
           <div className="input-field">
             <label>은메달</label>
-            <input type="number" name="silver" value={silver} onChange={onAddSilver} />
+            <input type="number" placeholder="은메달 개수" name="silver" value={silver} onChange={onAddSilver} />
           </div>
           <div className="input-field">
             <label>동메달</label>
-            <input type="number" name="bronze" value={bronze} onChange={onAddBronze} />
+            <input type="number" placeholder="동메달 개수" name="bronze" value={bronze} onChange={onAddBronze} />
           </div>
-
-          <div className="button-group">
-            <button type="submit">국가 추가</button>
-            <button type="button" onClick={onHandleUpdate}>
-              업데이트
-            </button>
-          </div>
+          <Button onHandleUpdate={onHandleUpdate} />
         </form>
 
         {countries.length > 0 ? (
-          <div className="table-group">
-            <table>
-              <caption> 메달 획득 현황 </caption>
-              <colgroup>
-                <col width="16.66%" />
-                <col width="16.66%" />
-                <col width="16.66%" />
-                <col width="16.66%" />
-                <col width="16.66%" />
-                <col width="16.66%" />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>국가명</th>
-                  <th>금메달</th>
-                  <th>은메달</th>
-                  <th>동메달</th>
-                  <th>메달 총 개수</th>
-                  <th>액션</th>
-                </tr>
-              </thead>
-              <tbody>
-                {countries.map((data, idx) => (
-                  <tr id={idx} key={data.country}>
-                    <td>{data.country}</td>
-                    <td>{data.gold}</td>
-                    <td>{data.silver}</td>
-                    <td>{data.bronze}</td>
-                    <td>{data.gold + data.silver + data.bronze}</td>
-                    <td>
-                      <button type="button" onClick={onHandleDelete}>
-                        삭제
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table setCountries={setCountries} onHandleDelete={onHandleDelete} countries={countries} country={country} />
         ) : (
-          <div className="no-data">
-            <span>아직 추가된 국가가 없습니다. 메달을 추적하세요!</span>
-          </div>
+          <Nodata />
         )}
       </main>
     </div>
