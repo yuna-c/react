@@ -8,6 +8,10 @@ function App() {
   const [silver, setSilver] = useState(0);
   const [bronze, setBronze] = useState(0);
   const [countries, setCountries] = useState([]);
+  // const [storage, setStorage] = useState(() => {
+  //   localStorage.setItem('country', JSON.stringify(countries));
+  //   // console.log(countries, localStorage.setItem('country', JSON.stringify(countries)));
+  // });
 
   const onAddCountry = (e) => {
     setCountry(e.target.value);
@@ -25,19 +29,6 @@ function App() {
     setBronze(e.target.value);
   };
 
-  // console.log(countries);
-  // const onSortCountry = () => {
-  //   countries.sort((a, b) => {
-  //     if (a.gold === b.gold) {
-  //       return b.gold + b.silver + b.bronze - (a.gold + a.silver + a.bronze);
-  //     } else {
-  //       return b.gold - a.gold;
-  //     }
-  //   });
-  // };
-  // console.log(onSortCountry);
-
-  // 하기 전에 setCountries()의 상태는 무엇일까? 스테이트는 바꼈지만 countries로 바뀌지 않은 로직을 받아 왔기 때문에 sort가 되지 않았던것!
   const onHandleSubmit = (e) => {
     e.preventDefault();
     const findCountry = countries.find((el) => el.country === country);
@@ -50,13 +41,12 @@ function App() {
 
     if (!country) {
       alert('국가명을 입력해 주세요.');
-      // return;
+      return;
     } else if (findCountry) {
       alert('이미 등록된 있는 국가입니다.');
+      return;
     } else {
-      // 추가를 할 수 있는 상태
-      // 1) sort 처리를 먼저
-      // const sortedArr = [...countries, newCountries].sort(~~~~);
+      // 1) sort 처리를 먼저( 추가 가능 상태 )
       const sortedArr = [...countries, newCountries].sort((a, b) => {
         if (a.gold === b.gold) {
           return b.gold + b.silver + b.bronze - (a.gold + a.silver + a.bronze);
@@ -64,17 +54,12 @@ function App() {
           return b.gold - a.gold;
         }
       });
-
       // 2) setCounties
       setCountries(sortedArr);
 
-      // countries를 바꿔주는 로직
-      // setCountries([...countries, newCountries]);
+      // 3)
+      localStorage.setItem('country', JSON.stringify(sortedArr));
     }
-
-    // 이 부분부터 counties는 바뀐 배열일까??? set으로 인해 바뀐 상태지만 그걸 다 가지고 오지 않았어서 처리가 되지 않았다.
-    // console.log(sortedArr);
-    // onSortCountry();
 
     setCountry('');
     setGold('');
@@ -83,8 +68,11 @@ function App() {
   };
 
   const onHandleUpdate = () => {
+    const getStorage = JSON.parse(localStorage.getItem('country'));
+    console.log(getStorage);
     const findCountry = countries.some((el) => el.country === country);
     const updateCounrty = [...countries].map((el) =>
+      // 업데이트 할 때도 숫자화 처리
       el.country === country ? { ...el, gold: Number(gold), silver: Number(silver), bronze: Number(bronze) } : el
     );
     if (!country) alert('국가를 입력해 주세요.');
@@ -96,6 +84,8 @@ function App() {
     const deletedCounrty = countries.filter((el) => el.country != country);
     setCountries(deletedCounrty);
   };
+
+  // console.log(storage, setStorage);
 
   return (
     <div id="wrap">
