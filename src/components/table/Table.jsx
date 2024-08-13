@@ -25,7 +25,7 @@ const Table = ({ countryState, onHandleDelete }) => {
         </thead>
         <tbody>
           {countryState.map((data, idx) => (
-            <tr id={idx} key={data.country}>
+            <tr key={idx}>
               <td>{data.country}</td>
               <td>{data.gold}</td>
               <td>{data.silver}</td>

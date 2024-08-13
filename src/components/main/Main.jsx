@@ -13,12 +13,33 @@ const Main = () => {
     silver: 0,
     bronze: 0
   });
+  const [sortState, setSortState] = useState('금은동');
 
   const { country, gold, silver, bronze } = medalState;
+  const findCountryState = countryState.find((e) => e.country === country); // 해당 객체에 country 있는지 확인하고 find로 주어진 조건의 첫번째 요소 찾아서 리턴 즉, 유효성 위한 문구 외부 상수화 함
 
   const onHandleInputChange = (e) => {
     const { name, value } = e.target;
     setMedalState((originalMedalState) => ({ ...originalMedalState, [name]: value }));
+  };
+
+  // sort 정렬 금은동/ 총메달로 분기
+  const onHandleSort = (countryState) => {
+    if (sortState === '금은동') {
+      return countryState.sort((a, b) => {
+        if (a.gold === b.gold) return b.silver === a.silver ? b.bronze - a.bronze : b.silver - a.silver;
+        return b.gold - a.gold;
+      });
+    }
+
+    if (sortState === '총메달') {
+      return countryState.sort((a, b) => {
+        const totalMedalA = a.gold + a.silver + a.bronze;
+        const totalMedalB = b.gold + b.silver + b.bronze;
+        return totalMedalB - totalMedalA;
+      });
+    }
+    return countryState;
   };
 
   const onHandleSubmit = (e) => {
@@ -29,12 +50,11 @@ const Main = () => {
       return;
     }
 
-    const findCountry = countryState.find((e) => e.country === country);
-
-    if (findCountry) {
+    if (findCountryState) {
       alert('이미 등록된 있는 국가입니다.');
       return;
     }
+
     const newcountryState = {
       country: country,
       gold: Number(gold),
@@ -42,11 +62,8 @@ const Main = () => {
       bronze: Number(bronze)
     };
 
-    const sortedArr = [...countryState, newcountryState].sort((a, b) => {
-      if (a.gold === b.gold) return b.gold + b.silver + b.bronze - (a.gold + a.silver + a.bronze);
-      else return b.gold - a.gold;
-    });
-    setCountryState(sortedArr);
+    const updateCountrySate = [...countryState, newcountryState];
+    setCountryState(onHandleSort(updateCountrySate, sortState));
 
     setMedalState({
       country: '',
@@ -62,23 +79,27 @@ const Main = () => {
       return;
     }
 
-    const findCountry = countryState.find((e) => e.country === country);
-
-    if (!findCountry) {
+    if (!findCountryState) {
       alert('등록 되어 있지 않은 국가입니다.');
       return;
     }
 
-    const updateCounrty = countryState.map((e) =>
+    const updateCounrtyState = countryState.map((e) =>
       e.country === country ? { ...e, gold: Number(gold), silver: Number(silver), bronze: Number(bronze) } : e
     );
 
-    return setCountryState(updateCounrty);
+    setCountryState(onHandleSort(updateCounrtyState, sortState));
   };
 
   const onHandleDelete = (countryToDelete) => {
     const deletedCounrty = countryState.filter((e) => e.country !== countryToDelete);
-    setCountryState(deletedCounrty);
+    setCountryState(deletedCounrty, sortState);
+  };
+
+  // 정렬 상태 업데이트 후 countryState 정렬
+  const onhandleSortChange = (newSortState) => {
+    setSortState(newSortState);
+    setCountryState(onHandleSort([...countryState], newSortState));
   };
 
   return (
@@ -120,16 +141,19 @@ const Main = () => {
         <Button onHandleUpdate={onHandleUpdate} />
       </form>
 
-      {countryState.length === 0 ? (
-        <Nodata />
-      ) : (
-        <Table
-          onHandleDelete={onHandleDelete}
-          setCountryState={setCountryState}
-          countryState={countryState}
-          country={country}
-        />
-      )}
+      <div className="button-sort">
+        <button onClick={() => onhandleSortChange('금은동')}>금,은,동 순 정렬</button>
+        <button
+          onClick={() => {
+            onhandleSortChange('총메달');
+            alert('총매달');
+          }}
+        >
+          총 메달 수 순 정렬
+        </button>
+      </div>
+
+      {countryState.length === 0 ? <Nodata /> : <Table onHandleDelete={onHandleDelete} countryState={countryState} />}
     </main>
   );
 };
