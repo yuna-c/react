@@ -1,4 +1,5 @@
 import './Nodata.scss';
+
 const Nodata = () => {
   return (
     <div className="no-data">
@@ -6,4 +7,5 @@ const Nodata = () => {
     </div>
   );
 };
+
 export default Nodata;

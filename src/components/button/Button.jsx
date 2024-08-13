@@ -10,4 +10,5 @@ const Button = ({ onHandleUpdate }) => {
     </div>
   );
 };
+
 export default Button;

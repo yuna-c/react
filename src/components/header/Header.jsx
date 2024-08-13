@@ -1,4 +1,5 @@
 import './Header.scss';
+
 const Header = () => {
   return (
     <header className="header">
@@ -6,4 +7,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;
