@@ -35,8 +35,7 @@ const Table = ({ countries, onHandleDelete }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    onHandleDelete;
-                    alert(`${idx}`);
+                    onHandleDelete(data.country);
                   }}
                 >
                   삭제
