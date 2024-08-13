@@ -1,5 +1,6 @@
 import Input from './../input/Input';
 import Button from './../button/Button';
+import Sort from '../sort/Sort';
 import Nodata from './../nodata/Nodata';
 import Table from './../table/Table';
 import { useState } from 'react';
@@ -16,14 +17,13 @@ const Main = () => {
   const [sortState, setSortState] = useState('금은동');
 
   const { country, gold, silver, bronze } = medalState;
-  const findCountryState = countryState.find((e) => e.country === country); // 해당 객체에 country 있는지 확인하고 find로 주어진 조건의 첫번째 요소 찾아서 리턴 즉, 유효성 위한 문구 외부 상수화 함
+  const findCountryState = countryState.find((e) => e.country === country);
 
   const onHandleInputChange = (e) => {
     const { name, value } = e.target;
     setMedalState((originalMedalState) => ({ ...originalMedalState, [name]: value }));
   };
 
-  // sort 정렬 금은동/ 총메달로 분기
   const onHandleSort = (countryState) => {
     if (sortState === '금은동') {
       return countryState.sort((a, b) => {
@@ -97,9 +97,9 @@ const Main = () => {
   };
 
   // 정렬 상태 업데이트 후 countryState 정렬
-  const onhandleSortChange = (newSortState) => {
+  const onHandleSortChange = (newSortState) => {
     setSortState(newSortState);
-    setCountryState(onHandleSort([...countryState], newSortState));
+    setCountryState(onHandleSort([...countryState], newSortState)); // 정렬 상태 업데이트 후 countryState 정렬
   };
 
   return (
@@ -141,17 +141,7 @@ const Main = () => {
         <Button onHandleUpdate={onHandleUpdate} />
       </form>
 
-      <div className="button-sort">
-        <button onClick={() => onhandleSortChange('금은동')}>금,은,동 순 정렬</button>
-        <button
-          onClick={() => {
-            onhandleSortChange('총메달');
-            alert('총매달');
-          }}
-        >
-          총 메달 수 순 정렬
-        </button>
-      </div>
+      <Sort onHandleSortChange={onHandleSortChange} />
 
       {countryState.length === 0 ? <Nodata /> : <Table onHandleDelete={onHandleDelete} countryState={countryState} />}
     </main>

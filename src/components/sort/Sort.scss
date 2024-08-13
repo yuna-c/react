@@ -1,0 +1,12 @@
+.button-sort {
+  margin: 40px 0 0;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    padding: 5px 5px;
+    &:hover {
+      font-weight: 500;
+    }
+  }
+}
