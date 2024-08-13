@@ -1,6 +1,6 @@
 import './Table.scss';
 
-const Table = ({ countries, onHandleDelete }) => {
+const Table = ({ countryState, onHandleDelete }) => {
   return (
     <div className="table-group">
       <table>
@@ -24,7 +24,7 @@ const Table = ({ countries, onHandleDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {countries.map((data, idx) => (
+          {countryState.map((data, idx) => (
             <tr id={idx} key={data.country}>
               <td>{data.country}</td>
               <td>{data.gold}</td>
