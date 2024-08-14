@@ -3,7 +3,7 @@ import Button from './../button/Button';
 import Sort from '../sort/Sort';
 import Nodata from './../nodata/Nodata';
 import Table from './../table/Table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Main.scss';
 
 const Main = () => {
@@ -17,7 +17,7 @@ const Main = () => {
   const [sortState, setSortState] = useState('금은동');
 
   const { country, gold, silver, bronze } = medalState;
-  const findCountryState = countryState.find((e) => e.country === country);
+  const findCountryState = countryState.find((e) => e.country === country); // 등록된 국가 예외
 
   const onHandleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,14 +55,14 @@ const Main = () => {
       return;
     }
 
-    const newcountryState = {
+    const newCountryState = {
       country: country,
       gold: Number(gold),
       silver: Number(silver),
       bronze: Number(bronze)
     };
 
-    const updateCountrySate = [...countryState, newcountryState];
+    const updateCountrySate = [...countryState, newCountryState];
     setCountryState(onHandleSort(updateCountrySate, sortState));
 
     setMedalState({
@@ -96,11 +96,14 @@ const Main = () => {
     setCountryState(deletedCounrty, sortState);
   };
 
-  // 정렬 상태 업데이트 후 countryState 정렬
   const onHandleSortChange = (newSortState) => {
     setSortState(newSortState);
-    setCountryState(onHandleSort([...countryState], newSortState)); // 정렬 상태 업데이트 후 countryState 정렬
   };
+
+  // 상태 변경될 떄마다 정렬 다시 수행( sort가 더블클릭해야 해결되는 문제로 인한 사용 )
+  useEffect(() => {
+    setCountryState((originalSortState) => onHandleSort([...originalSortState], sortState));
+  }, [sortState]);
 
   return (
     <main className="main">
@@ -141,9 +144,14 @@ const Main = () => {
         <Button onHandleUpdate={onHandleUpdate} />
       </form>
 
-      <Sort onHandleSortChange={onHandleSortChange} />
-
-      {countryState.length === 0 ? <Nodata /> : <Table onHandleDelete={onHandleDelete} countryState={countryState} />}
+      {countryState.length === 0 ? (
+        <Nodata />
+      ) : (
+        <>
+          <Sort onHandleSortChange={onHandleSortChange} />
+          <Table onHandleDelete={onHandleDelete} countryState={countryState} />
+        </>
+      )}
     </main>
   );
 };
