@@ -2,9 +2,12 @@
 
 :root {
   --baseFont: 'Satoshi', 'Noto Sans KR', 'Nanum Gothic', '맑은 고딕';
-  --pointFont: 'East Sea Dokdo', 'Noto Sans KR';
   --baseColor: #191919;
-  --bgColor: #ffffff;
+  --pointColor: #9333337a;
+  --activeColor: #933333d6;
+  --borderColor: #0000001a;
+  --bgColor: #f4f4f9;
+  --mainColor: #ffffff;
   --baseSize: 1rem;
 }
 
@@ -13,9 +16,9 @@ html {
 
   body {
     background: var(--bgColor);
+    color: var(--baseColor);
     font-size: var(--baseSize);
     font-family: var(--baseFont);
-    background-color: #f4f4f9;
 
     #root {
       margin-top: 50px;
@@ -26,14 +29,10 @@ html {
     }
   }
 }
-@media (max-width: 1400px) {
-}
-html {
-  font-size: 15px;
 
-  body {
-    #app {
-    }
+@media (max-width: 1400px) {
+  html {
+    font-size: 16px;
   }
 }
 
@@ -41,20 +40,9 @@ html {
 @media (max-width: 1200px) {
   html {
     font-size: 15px;
-
-    body {
-      #app {
-      }
-    }
   }
 }
 
 // mobile
 @media (max-width: 640px) {
-  html {
-    body {
-      #app {
-      }
-    }
-  }
 }

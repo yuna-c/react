@@ -1,6 +1,16 @@
 import './Table.scss';
 
-const Table = ({ countryState, onHandleDelete }) => {
+const Table = ({ countryState, setCountryState, sortState }) => {
+  const onHandleDelete = (target) => {
+    if (window.confirm('삭제하시겠습니까?')) {
+      const deletedCounrty = countryState.filter((e) => e.country !== target);
+      setCountryState(deletedCounrty, sortState);
+      alert('삭제 완료');
+    } else {
+      alert('취소');
+    }
+  };
+
   return (
     <div className="table-group">
       <table>
@@ -25,7 +35,7 @@ const Table = ({ countryState, onHandleDelete }) => {
         </thead>
         <tbody>
           {countryState.map((data, idx) => (
-            <tr key={idx}>
+            <tr key={idx} id={data.id}>
               <td>{data.country}</td>
               <td>{data.gold}</td>
               <td>{data.silver}</td>

@@ -17,7 +17,7 @@
     }
 
     thead {
-      border-bottom: 1px solid #0000001a;
+      border-bottom: 1px solid var(--borderColor);
       border: 5px;
       background-color: var(--baseColor);
       color: var(--bgColor);
@@ -47,16 +47,16 @@
         td {
           text-align: center;
           padding: 10px 10px;
-          border-bottom: 1px solid #000;
+          border-bottom: 1px solid var(--baseColor);
 
           button {
             padding: 5px 15px;
             border-radius: 5px;
-            background-color: rgba(147, 51, 51, 0.478);
+            background-color: var(--pointColor);
             color: var(--bgColor);
 
             &:hover {
-              background-color: rgba(147, 51, 51, 0.84);
+              background-color: var(--activeColor);
             }
           }
         }

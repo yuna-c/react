@@ -1,51 +1,67 @@
-# 프로젝트 주제
+# 주제
 
-2024 파리 올림픽에서 각 나라가 획득한 메달 수를 추적하는 Olympic Medal Tracker 만들기<br>
-[Olympic Medal Tracker](https://react-six-olive.vercel.app/)
+2024 파리 올림픽에서 각 나라가 획득한 메달 수를 추적하는 Olympic Medal Tracker 만들기
+
+# 주소
+
+[Olympic Medal Tracker](https://react-sigma-beryl.vercel.app//)
+
+# 개발 기간
+
+2024.08.10~ 2024.08.14
+
+# 기술 스택
+
+<img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<br>
 
 # 폴더 구조
 
 ```
-@ Olympic                                              //
-├─ public                                              //
-│  └─ olympics.png                                     //
-├─ src                                                 //
-│  ├─ App.jsx                                          //
-│  ├─ components                                       //
-│  │  ├─ button                                        //
-│  │  │  ├─ Button.jsx                                 //
-│  │  │  └─ Button.scss                                //
-│  │  ├─ header                                        //
-│  │  │  ├─ Header.jsx                                 //
-│  │  │  └─ Header.scss                                //
-│  │  ├─ input                                         //
-│  │  │  ├─ Input.jsx                                  //
-│  │  │  └─ Input.scss                                 //
-│  │  ├─ main                                          //
-│  │  │  ├─ Main.jsx                                   //
-│  │  │  └─ Main.scss                                  //
-│  │  ├─ nodata                                        //
-│  │  │  ├─ Nodata.jsx                                 //
-│  │  │  └─ Nodata.scss                                //
-│  │  ├─ sort                                          //
-│  │  │  ├─ Sort.jsx                                   //
-│  │  │  └─ Sort.scss                                  //
-│  │  └─ table                                         //
-│  │     ├─ Table.jsx                                  //
-│  │     └─ Table.scss                                 //
-│  ├─ index.jsx                                        //
-│  └─ styles                                           //
-│     ├─ App.scss                                      //
-│     ├─ _reset.scss                                   //
-│     └─ _variables.scss                               //
-├─ vite.config.js                                      //
-├─ eslint.config.js                                    //
-├─ package-lock.json                                   //
-├─ package.json                                        //
-├─ yarn.lock                                           //
-├─ .gitignore                                          //
-├─ .prettierrc                                         //
-└─ index.html                                          //
+
+@ Olypics
+├─ public
+│  └─ olympics.png
+├─ src
+│  ├─ App.jsx
+│  ├─ components
+│  │  ├─ header
+│  │  │  ├─ Header.jsx
+│  │  │  └─ Header.scss
+│  │  └─ main
+│  │     ├─ Main.jsx
+│  │     ├─ Main.scss
+│  │     ├─ form
+│  │     │  ├─ Form.jsx
+│  │     │  ├─ Form.scss
+│  │     │  ├─ button
+│  │     │  │  ├─ Button.jsx
+│  │     │  │  └─ Button.scss
+│  │     │  └─ input
+│  │     │     ├─ Input.jsx
+│  │     │     └─ Input.scss
+│  │     ├─ nodata
+│  │     │  ├─ Nodata.jsx
+│  │     │  └─ Nodata.scss
+│  │     ├─ sort
+│  │     │  ├─ Sort.jsx
+│  │     │  └─ Sort.scss
+│  │     └─ table
+│  │        ├─ Table.jsx
+│  │        └─ Table.scss
+│  ├─ styles
+│  │  ├─ App.scss
+│  │  ├─ _reset.scss
+│  │  └─ _variables.scss
+│  └─ index.jsx
+├─ eslint.config.js
+├─ vite.config.js
+├─ yarn.lock
+├─ .gitignore
+├─ .prettierrc
+├─ index.html
+└─ README.md
+
 ```
 
 # 필수 기능
@@ -66,9 +82,9 @@
 - [x] 나라 이름 입력했을 때, 이미 등록된 국가라면 alert 메시지 띄우기
 - [x] 업데이트하는 국가가 등록되지 않은 경우 alert 메시지
 - [x] 메달 총 개수 보여주고, 메달 총 개수대로 정렬
-- [ ] 메달 정보 로컬스토리지에 저장
+- [x] 메달 정보 로컬스토리지에 저장
 
-# 문제
+# 질문/답변
 
 1. **JSX(Javascript Syntax eXtension) 문법**이란 무엇일까요?
 
@@ -92,3 +108,5 @@
 5. 반복되는 컴포넌트를 파악하고 재사용할 수 있는 **컴포넌트로 분리해 보셨나요?** 그렇다면 **어떠한 이점이 있었나요?**
 
    - 보기에 편하고 컴포넌트 내에서 수정을 하면 코드도 훨씬 짧기 때문에 좋음
+
+# 느낀점
