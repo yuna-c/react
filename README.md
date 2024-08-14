@@ -15,6 +15,10 @@
 <img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
 <br>
 
+# 컴포넌트 구조
+
+![11111](https://github.com/user-attachments/assets/50618995-f551-4c93-924d-b9836b950aef)
+
 # 폴더 구조
 
 ```
@@ -108,5 +112,3 @@
 5. 반복되는 컴포넌트를 파악하고 재사용할 수 있는 **컴포넌트로 분리해 보셨나요?** 그렇다면 **어떠한 이점이 있었나요?**
 
    - 보기에 편하고 컴포넌트 내에서 수정을 하면 코드도 훨씬 짧기 때문에 좋음
-
-# 느낀점
