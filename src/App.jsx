@@ -1,28 +1,60 @@
-import GrandFather from './components/GrandFather';
+import { useState } from 'react';
+import Box1 from './components/Box1';
+import Box2 from './components/Box2';
+import Box3 from './components/Box3';
 import './styles/App.css';
 
 // 🌞🌞🌞🌞🌞
-// useContext(전역 데이터 관리)
-// 특정 영역 안에서 특정 state(상태)를 공유한다.
+// memoization
 
-// props => prop drilling(부모 → 자식 → 그 자식 → 그자식의 자식)
-// prop drilling의 문제점
-// 너무 깊어지면 이 prop이 어떤 컴포넌트로부터 왔는지 파악이 어려움
-// 어떤 컴포넌트에서 오류가 발생할 경우 추적이 힘듬
+// re-rendering 발생 조건
+// 1. 컴포넌트에서 state가 바뀌었을 때
+// 2. 컴포넌트가 내려받은 props가 변경되었을 때
+// 3. 부모 컴포넌트가 리-렌더링 된 경우 자식 컴포넌트는 모두
 
-// context API 필수 개념
-// - createContext: context를 생성
-// - useContext: context를 구독하고 해당 context의 현재 값을 읽음
-// - Provider: context를 하위 컴포넌트에게 전달
+// 최적화(Optimization)
+// 리액트에서 리렌더링이 빈번 = 비용증가 => 불필요한 렌더링 줄이기(임시 값으로 가져다 놓고 쓰는)
+// - memo(React.memo) : 컴포넌트를 캐싱(memoization)
+// - useCallback : 함수를 캐싱(memoization)
+// - useMemo : 값을 캐싱(memoization)
 
-// context API 문제점
-// useContext를 사용할 때, Provider에서 제공한 value가 달라진다면 useContext를 사용하고 있는 모든 컴포넌트가 리렌더링
+// memo(React.memo)
+// 부모 컴포넌트가 리렌더링 되면 자식컴포넌트는 모두 리렌더링 되기 때문에, 바뀐게 없어서 리랜더링이 필요 없는 컴포넌트들을 React.memo
+
+const boxesStyle = {
+  display: 'flex',
+  marginTop: '10px'
+};
 
 const App = () => {
+  console.log('App 컴포넌트가 렌더링 되었습니다.');
+
+  const [count, setCount] = useState(0);
+
+  // 1을 증가시키는 함수
+  const onPlusButtonClickHandler = () => {
+    setCount(count + 1);
+  };
+
+  // 1을 감소시키는 함수
+  const onMinusButtonClickHandler = () => {
+    setCount(count - 1);
+  };
+
   return (
     <>
-      <h1>Context API</h1>
-      <GrandFather />
+      <h1>memoization</h1>
+      <h3>카운트 예제입니다.</h3>
+      <p>현재 카운트 : {count}</p>
+
+      <button onClick={onPlusButtonClickHandler}>+</button>
+      <button onClick={onMinusButtonClickHandler}>-</button>
+
+      <div style={boxesStyle}>
+        <Box1 />
+        <Box2 />
+        <Box3 />
+      </div>
     </>
   );
 };
