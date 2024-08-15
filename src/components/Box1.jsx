@@ -1,4 +1,6 @@
-const Box1 = () => {
+import React from 'react';
+
+const Box1 = ({ initCount }) => {
   console.log('Box1이 렌더링되었습니다.');
   return (
     <div
@@ -14,9 +16,9 @@ const Box1 = () => {
         alignItems: 'center'
       }}
     >
-      Box1
+      <button onClick={initCount}>초기화</button>
     </div>
   );
 };
 
-export default Box1;
+export default React.memo(Box1);
