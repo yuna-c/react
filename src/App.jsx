@@ -1,42 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
 import './styles/App.css';
 
 // 🌞🌞🌞🌞🌞
-// useRef
-// useState와 더불어 특정 값을 저장(저장 공간)하는데 쓰임
-// rendering/re-rendering과 상관없이 값을 기억하기 위해 사용되는 것
-// DOM요소 핸들링시 쓰임
+// useContext(전역 데이터 관리)
+// 특정 영역 안에서 특정 state(상태)를 공유한다.
 
-// useState와 useRef의 차이
-// useState: rendering/ re-rendering 관련 O
-// useRef : rendering 관련 X
+// props => prop drilling(부모 → 자식 → 그 자식 → 그자식의 자식)
+// prop drilling의 문제점
+// 너무 깊어지면 이 prop이 어떤 컴포넌트로부터 왔는지 파악이 어려움
+// 어떤 컴포넌트에서 오류가 발생할 경우 추적이 힘듬
+
+// context API 필수 개념
+
+// - createContext: context를 생성
+// - useContext: context를 구독하고 해당 context의 현재 값을 읽음
+// - Provider: context를 하위 컴포넌트에게 전달
 
 const App = () => {
-  const idRef = useRef('');
-  const pwRef = useRef('');
-
-  const [id, setId] = useState('');
-
-  const onIdChangeHandler = (e) => {
-    setId(e.target.value);
-  };
-
-  // 최초 랜더링 시에만 focus
-  useEffect(() => {
-    idRef.current.focus();
-    if (id.length > 10) {
-      pwRef.current.focus();
-    }
-  }, [id]);
-
   return (
     <>
-      <div>
-        아이디 : <input type='text' ref={idRef} onChange={onIdChangeHandler} />
-      </div>
-      <div>
-        비밀번호 : <input type='password' ref={pwRef} />
-      </div>
+      <div></div>
     </>
   );
 };
