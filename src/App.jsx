@@ -11,10 +11,12 @@ import './styles/App.css';
 // 어떤 컴포넌트에서 오류가 발생할 경우 추적이 힘듬
 
 // context API 필수 개념
-
 // - createContext: context를 생성
 // - useContext: context를 구독하고 해당 context의 현재 값을 읽음
 // - Provider: context를 하위 컴포넌트에게 전달
+
+// context API 문제점
+// useContext를 사용할 때, Provider에서 제공한 value가 달라진다면 useContext를 사용하고 있는 모든 컴포넌트가 리렌더링
 
 const App = () => {
   return (
