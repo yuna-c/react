@@ -1,23 +1,30 @@
-import { useState } from 'react';
-import Child from './components/Child';
+import { useEffect, useState } from 'react';
 import './styles/App.css';
 
 // 🌞🌞🌞🌞🌞
-// useState
-// 기본 업데이트 : 첫번째 줄 ~ 세번째 줄의 있는 setNumber가 각각 실행되는 것이 아니라, 배치(batch)로 처리, 명령을 하나로 모아 최종적으로 한번만 실행
-// 함수형 업데이트 : 3번을 동시에 명령을 내리면, 그 명령을 모아 순차적으로 각각 1번씩 실행
+// useEffect
+// 리액트 컴포넌트가 렌더링 된 이후마다 특정 작업을 수행하도록 설정할 수 있는 Hook
+// 어떤 컴포넌트가 화면에 보여졌을 때 내가 무언가를 실행하고 싶을 때, 어떤 컴포넌트가 화면에서 사라졌을 때 무언가를 실행하고 싶을 때
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [value, setValue] = useState('');
+
+  // setValue가 계속 변하며 리랜더링 되며 계속 useEffect 호출되기 때문에
+  useEffect(() => {
+    console.log('hello useEffect');
+  });
 
   return (
     <>
-      <div>
-        <h1>여기는 부모컴포넌트입니다.</h1>
-        <span>현재 카운트 : {count}</span>
-        <br />
-        <Child setCount={setCount} /> {/* 여기에 어떤 props를 넘겨줘야 할까요? */}
-      </div>
+      <h1>useEffect</h1>
+      <input
+        type='text'
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          console.log('value => ', value);
+        }}
+      />
     </>
   );
 };
