@@ -13,27 +13,28 @@ import './styles/App.css';
 
 const App = () => {
   const [count, setCount] = useState(0);
+  const countRef = useRef(0);
 
-  const ref = useRef('초기값');
-  console.log('ref =>', ref); //current 가지고 있는 객체
+  const plusStateCountButtonHandler = () => {
+    setCount(count + 1, countRef);
+    console.log(count + 1);
+  };
 
-  // ref 변경 가능
-  ref.current = '바꾼 값';
-  console.log('current =>', ref);
+  const plusRefCountButtonHandler = () => {
+    countRef.current++;
+    console.log(countRef.current++);
+  };
 
   return (
     <>
-      <h1>useRef</h1>
-
-      <br />
-      {count}
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        리랜더링
-      </button>
+      <div>
+        state 영역입니다. {count} <br />
+        <button onClick={plusStateCountButtonHandler}>state 증가</button>
+      </div>
+      <div>
+        ref 영역입니다. {countRef.current} <br />
+        <button onClick={plusRefCountButtonHandler}>ref 증가</button>
+      </div>
     </>
   );
 };
