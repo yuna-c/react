@@ -4,27 +4,35 @@ import './styles/App.css';
 // 🌞🌞🌞🌞🌞
 // useState
 
+// 기본 업데이트 : 첫번째 줄 ~ 세번째 줄의 있는 setNumber가 각각 실행되는 것이 아니라, 배치(batch)로 처리, 명령을 하나로 모아 최종적으로 한번만 실행
+// 함수형 업데이트 : 3번을 동시에 명령을 내리면, 그 명령을 모아 순차적으로 각각 1번씩 실행
+
 const App = () => {
   const [count, setCount] = useState(0);
-  // 직접 값 입력
-  const handleCountPlus = () => {
-    setCount(count + 1);
-  };
 
-  // 함수
-  const handleCountPlusFn = () => {
-    // setCount(함수 (인자:현재 state) => {변경하는 코드})
-    setCount((현재값) => {
-      return 현재값 + 1;
-    });
-  };
   return (
     <>
       <div>
         {count}
         <br />
-        <button onClick={handleCountPlus}>직접 값 입력</button>
-        <button onClick={handleCountPlusFn}>함수</button>
+        <button
+          onClick={() => {
+            setCount(count + 1);
+            setCount(count + 1);
+            setCount(count + 1);
+          }}
+        >
+          직접 값 입력 +1
+        </button>
+        <button
+          onClick={() => {
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+          }}
+        >
+          함수 +3
+        </button>
       </div>
     </>
   );
