@@ -28,6 +28,8 @@ const HeavyComponent = () => {
       </button>
       <br />
       {count}
+
+      <br />
     </div>
   );
 };

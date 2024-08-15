@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import HeavyComponent from './components/HeavyComponent.jsx';
+import ObjectComponent from './components/ObjectComponent';
 import './styles/App.css';
 
 // 🌞🌞🌞🌞🌞
@@ -40,6 +41,10 @@ const App = () => {
       <StNav>내비게이션 바</StNav>
       <HeavyComponent />
       <StFooter>푸터영역이에요</StFooter>
+      <br />
+      <hr />
+      <br />
+      <ObjectComponent />
     </>
   );
 };
