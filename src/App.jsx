@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './styles/App.css';
 
 // 🌞🌞🌞🌞🌞
@@ -12,28 +12,30 @@ import './styles/App.css';
 // useRef : rendering 관련 X
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(0);
+  const idRef = useRef('');
+  const pwRef = useRef('');
 
-  const plusStateCountButtonHandler = () => {
-    setCount(count + 1, countRef);
-    console.log(count + 1);
+  const [id, setId] = useState('');
+
+  const onIdChangeHandler = (e) => {
+    setId(e.target.value);
   };
 
-  const plusRefCountButtonHandler = () => {
-    countRef.current++;
-    console.log(countRef.current++);
-  };
+  // 최초 랜더링 시에만 focus
+  useEffect(() => {
+    idRef.current.focus();
+    if (id.length > 10) {
+      pwRef.current.focus();
+    }
+  }, [id]);
 
   return (
     <>
       <div>
-        state 영역입니다. {count} <br />
-        <button onClick={plusStateCountButtonHandler}>state 증가</button>
+        아이디 : <input type='text' ref={idRef} onChange={onIdChangeHandler} />
       </div>
       <div>
-        ref 영역입니다. {countRef.current} <br />
-        <button onClick={plusRefCountButtonHandler}>ref 증가</button>
+        비밀번호 : <input type='password' ref={pwRef} />
       </div>
     </>
   );
