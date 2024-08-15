@@ -1,3 +1,4 @@
+import GrandFather from './components/GrandFather';
 import './styles/App.css';
 
 // 🌞🌞🌞🌞🌞
@@ -18,7 +19,8 @@ import './styles/App.css';
 const App = () => {
   return (
     <>
-      <div></div>
+      <h1>Context API</h1>
+      <GrandFather />
     </>
   );
 };
