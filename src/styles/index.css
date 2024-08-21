@@ -1,12 +1,11 @@
 @charset "utf-8";
 
-/* reset */
 html {
-	min-height: 100%;
-	line-height: 1.35;
-	font-family: 'Noto Sans KR', 'Sans-serif';
-	overflow-y: auto;
-	-webkit-text-size-adjust: none;
+  min-height: 100%;
+  line-height: 1.35;
+  font-family: 'Noto Sans KR', 'Sans-serif';
+  overflow-y: auto;
+  -webkit-text-size-adjust: none;
 }
 html,
 body,
@@ -89,15 +88,15 @@ time,
 mark,
 audio,
 video {
-	line-height: inherit;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-family: 'Noto Sans KR', 'Sans-serif';
-	vertical-align: baseline;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'Noto Sans KR', 'Sans-serif';
+  vertical-align: baseline;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 article,
 aside,
@@ -110,84 +109,84 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+  display: block;
 }
 body {
-	width: 100%;
-	min-height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 ol,
 ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote,
 q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 table {
-	padding: 0;
-	border: 0;
-	border-spacing: 0;
-	border-collapse: collapse;
+  padding: 0;
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 th,
 td {
-	padding: 0;
+  padding: 0;
 }
 select,
 input,
 textarea,
 button {
-	margin: 0;
-	padding: 0;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	border-radius: 0;
-	outline: none;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	font-family: inherit;
-	vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: inherit;
+  vertical-align: middle;
 }
 input,
 button {
-	background: transparent;
-	-webkit-border-radius: 0;
-	-webkit-appearance: none;
-	border: 1px solid #000;
+  background: transparent;
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
+  border: 1px solid #000;
 }
 input[type='button'],
 button,
 select {
-	cursor: pointer;
+  cursor: pointer;
 }
 select {
-	-o-appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
+  -o-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 select::-ms-expand {
-	display: none;
+  display: none;
 }
 textarea {
-	padding: 0;
-	background: transparent;
-	border: 0;
-	overflow-y: scroll;
-	resize: none;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  overflow-y: scroll;
+  resize: none;
 }
 a {
-	background: transparent;
-	text-decoration: none;
-	color: #000;
-	outline: 0;
+  background: transparent;
+  text-decoration: none;
+  color: #000;
+  outline: 0;
 }
