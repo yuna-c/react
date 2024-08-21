@@ -3,11 +3,6 @@ import AddForm from './components/AddForm';
 import TodoList from './components/TodoList';
 import styled from 'styled-components';
 
-const StContainer = styled.section`
-  min-width: 800px;
-  margin: 0 auto;
-`;
-
 const App = () => {
   return (
     <StContainer className={styles.wrap}>
@@ -19,3 +14,8 @@ const App = () => {
 };
 
 export default App;
+
+const StContainer = styled.section`
+  min-width: 800px;
+  margin: 0 auto;
+`;

@@ -6,7 +6,7 @@ import { StButton, StFormContainer, StInput } from './AddFormStyle';
 
 const AddForm = () => {
   // const userID = generateUUID();
-  const [title, setTodo] = useState('');
+  const [todo, setTodo] = useState('');
   const dispatch = useDispatch();
 
   const onHandleInput = (e) => {
@@ -17,20 +17,23 @@ const AddForm = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (title === '') return;
+    if (todo === '') return;
 
     dispatch(
       addTodo({
         id: +new Date().getTime().toString().slice(0, 10),
         // id: userID,
-        title
+        title: todo
       })
     );
   };
+
   return (
     <StFormContainer className="AddForm">
-      <StInput value={title} onChange={onHandleInput} type="text" />
-      <StButton onClick={onSubmitHandler}>추가하기</StButton>
+      <form onSubmit={onSubmitHandler}>
+        <StInput value={todo} onChange={onHandleInput} type="text" />
+        <StButton>추가하기</StButton>
+      </form>
     </StFormContainer>
   );
 };

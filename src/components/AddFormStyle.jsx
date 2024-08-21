@@ -2,10 +2,13 @@ import styled from 'styled-components';
 // yarn add styled-components
 
 const StFormContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  /* padding: 30px; */
   padding: 30px 0;
+
+  form {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+  }
 `;
 
 const StButton = styled.button`
