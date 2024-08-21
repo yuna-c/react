@@ -7,6 +7,8 @@
 - useNavigate()
 - useLocation()
 - Link()
+- childern(공통 layout)
+- useParams(:id) : Dynamic route
 
 # Git 사전 설치
 

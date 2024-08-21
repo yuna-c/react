@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../compoments/Home';
 import About from '../compoments/About';
+import Contacts from '../compoments/Contacts';
 import Contact from '../compoments/Contact';
 import Works from '../compoments/Works';
 import Layout from './Layout';
@@ -24,8 +25,10 @@ const Router = () => {
 				*/}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/works" element={<Works />} />
+          <Route path="/contacts" element={<Contacts />} />
+          {/* 아래 코드를 추가해주세요. 👇 */}
+          <Route path="/contacts/:id" element={<Contact />} />
         </Routes>
       </Layout>
     </BrowserRouter>
