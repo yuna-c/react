@@ -9,6 +9,7 @@
 - Link()
 - childern(공통 layout)
 - useParams(:id) : Dynamic route
+- Outlet : 중첩 라우팅
 
 # Git 사전 설치
 
