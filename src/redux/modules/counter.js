@@ -1,8 +1,8 @@
-// Action Creator
+// Action Value
 const ADD_NUMBER = 'ADD_NUMBER';
 const REMOVE_NUMBER = 'REMOVE_NUMBER';
 
-// 액션객체를 반환하는 함수 생성
+// Action Creator
 export const addNumber = (payload) => {
   return {
     type: ADD_NUMBER,
