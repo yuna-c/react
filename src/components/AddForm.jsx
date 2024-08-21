@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo } from './../redux/modules/todos';
+// import { addTodo } from './../redux/modules/todos';
 import { StButton, StFormContainer, StInput } from './AddFormStyle';
+import { addTodo } from '../redux/slices/todosSilce';
 // import generateUUID from '../hooks/uuid';
 
 const AddForm = () => {

@@ -1,30 +1,32 @@
-# Redux
+# Redux Toolkit
 
 - yarn add redux react-redux
-- yarn add redux, yarn add react-redux 축약
+- yarn add react-redux @reduxjs/toolkit
 
-# Styled Components
+# Redux Dev Tools
 
-- yarn add styled-components
+- 개발자 도구 -> Redux
+- [Redux DevTools](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ko)
 
-# Redux 흐름
+# Flux 패턴
 
-1. View 에서 액션이 일어난다.
-2. dispatch 에서 action이 일어나게 된다.
-3. action에 의한 reducer 함수가 실행되기 전에 middleware가 작동한다.
-4. middleware 에서 명령내린 일을 수행하고 난뒤, reducer 함수를 실행한다. (3, 4번은 아직 몰라도 됩니다!)
-5. reducer 의 실행결과 store에 새로운 값을 저장한다.
-6. store의 state에 subscribe 하고 있던 UI에 변경된 값을 준다.
+애플리케이션 아키텍처 -> 단방향 흐름을 강조
 
-- [@리덕스 흐름 이해하기](https://velog.io/@annahyr/%EB%A6%AC%EB%8D%95%EC%8A%A4-%ED%9D%90%EB%A6%84-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
+1. **Dispatcher**: 애플리케이션 내 모든 데이터 흐름을 관리하는 중앙 허브 역할을 합니다. 액션들이 발생하면 디스패처를 통해 스토어로 전달됩니다.
+2. **Stores**: 애플리케이션의 상태(데이터)와 로직을 보유합니다. 스토어는 디스패처를 통해 전달된 액션에 반응하여 상태를 변경하고, 변경 사항을 뷰에 알립니다.
+3. **Actions**: 상태 변화를 일으킬 때 사용하는 간단한 객체입니다. 사용자 인터페이스에서 발생한 사용자의 행동을 액션으로 표현하고, 이를 디스패처를 통해 스토어로 전달합니다.
+4. **Views (React Components)**: 사용자 인터페이스를 구성하는 React 컴포넌트들입니다. 스토어에서 상태가 변하면, 뷰는 이를 반영하여 사용자 인터페이스를 업데이트합니다.
 
-# Action Creator 문서
+# Duck vs Flux
 
-- [@action creator](https://redux.js.org/api/bindactioncreators/#todoactioncreatorsjs)
+공통점 : 애플리케이션의 상태 관리와 데이터 흐름
+Ducks : Redux 코드의 구조를 단순화
+Flux : 애플리케이션의 데이터 흐름을 체계화
 
-# Ducks 문서
+# 참고 자료
 
-- [@ducks-modular-redux](https://github.com/erikras/ducks-modular-redux)
+- [만화로 보는 Flux](https://bestalign.github.io/translation/cartoon-guide-to-flux/)
+- [Flux와 redux의 관계](https://taegon.kim/archives/5288)
 
 # Git 사전 설치
 

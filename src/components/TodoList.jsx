@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { StButton, StButtonBox, StTodo, StTodos } from './TodoListStyle';
-import { deleteTodo, toggleTodo } from '../redux/modules/todos';
+import { deleteTodo, toggleTodo } from '../redux/slices/todosSilce';
+// import { deleteTodo, toggleTodo } from '../redux/modules/todos';
 
 const TodoList = () => {
   const { todos } = useSelector((state) => state.todos);
-  console.log(`todos =>`, todos);
+  console.log(`todosToolkit =>`, todos);
   const dispatch = useDispatch();
 
   // handler
