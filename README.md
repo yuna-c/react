@@ -2,6 +2,11 @@
 
 - yarn add react-redux @reduxjs/toolkit
 
+# Redux Dev Tools
+
+- 개발자 도구 -> Redux
+- [Redux DevTools](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ko)
+
 # Git 사전 설치
 
 - [Git](https://nodejs.org/en/)
