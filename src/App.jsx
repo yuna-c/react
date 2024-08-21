@@ -1,12 +1,20 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './compoments/Home';
-import About from './compoments/About';
-import Contact from './compoments/Contact';
-import Works from './compoments/Works';
+// import Home from './compoments/Home';
+// import About from './compoments/About';
+// import Contact from './compoments/Contact';
+// import Works from './compoments/Works';
+
+import Home from './pages/Home';
+import Gt from './pages/Gt';
+
 import './styles/App.css';
+import Detail from './pages/Detail';
+import Test from './pages/Test';
 
 // 🌞🌞🌞🌞🌞
 // yarn add react-router-dom
+
+// 동적 라우트 path="/detail/:id"
 
 const App = () => {
   return (
@@ -20,9 +28,9 @@ const App = () => {
           {/* yarn dev 재시작 */}
 
           <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="works" element={<Works />} />
+          <Route path="/Gt" element={<Gt />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/test/:first/:second" element={<Test />} />
         </Routes>
       </BrowserRouter>
     </>
