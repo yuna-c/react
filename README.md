@@ -1,11 +1,6 @@
-# React + Vite
+# Redux Toolkit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- yarn add react-redux @reduxjs/toolkit
 
 # Git 사전 설치
 
@@ -25,8 +20,8 @@ Currently, two official plugins are available:
 # Vite로 리액트 프로젝트 셋업(CMD)
 
 - cd Desktop
+- yarn create vite folder --template react
 - cd folder
-- yarn create vite my-react-app --template react
 
 # 접근 및 실행(my-react-app)
 
