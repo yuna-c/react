@@ -1,18 +1,21 @@
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 
 const Detail = () => {
   const 변수이름아무거나 = useParams();
-  console.log(변수이름아무거나);
+  console.log('Params:', 변수이름아무거나);
 
   const 이름 = 변수이름아무거나.id;
-  console.log(이름);
+  console.log('ID:', 이름);
 
   const [쿼리파람, set쿼리파람] = useSearchParams();
   console.log(쿼리파람);
 
   // get 필수 => ?age=20
   const 나이 = 쿼리파람.get('age');
-  console.log(나이);
+  console.log('Age:', 나이);
+
+  const location = useLocation();
+  console.log('Location:', location);
 
   return (
     <>
