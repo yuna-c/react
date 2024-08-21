@@ -32,7 +32,7 @@ const StButtonBox = styled.section`
 `;
 
 const StButton = styled.button`
-  width: 50%;
+  width: 33.3333%;
   border: none;
   cursor: pointer;
   border-radius: 12px;

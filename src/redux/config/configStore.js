@@ -11,4 +11,5 @@ const store = configureStore({
     todos: todosSilce
   }
 });
+
 export default store;

@@ -21,8 +21,9 @@ const AddForm = () => {
     if (todo === '') return;
 
     dispatch(
+      // +new Date().getTime().toString().slice(0, 10),
       addTodo({
-        id: +new Date().getTime().toString().slice(0, 10),
+        id: new Date().getTime(),
         // id: userID,
         title: todo
       })
@@ -32,10 +33,15 @@ const AddForm = () => {
   return (
     <StFormContainer className="AddForm">
       <form onSubmit={onSubmitHandler}>
-        <StInput value={todo} onChange={onHandleInput} type="text" />
-        <StButton>추가하기</StButton>
+        <label htmlFor="todo">Todos의 제목을 입력하세요</label>
+        <br />
+        <div className="inputText">
+          <StInput id="todo" value={todo} onChange={onHandleInput} type="text" />
+          <StButton>추가하기</StButton>
+        </div>
       </form>
     </StFormContainer>
   );
 };
+
 export default AddForm;

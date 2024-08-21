@@ -5,9 +5,14 @@ const StFormContainer = styled.div`
   padding: 30px 0;
 
   form {
-    width: 100%;
-    display: flex;
-    gap: 24px;
+    label {
+      display: block;
+    }
+    .inputText {
+      width: 100%;
+      display: flex;
+      gap: 24px;
+    }
   }
 `;
 

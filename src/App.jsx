@@ -1,21 +1,7 @@
-import styles from './styles/App.module.css';
-import AddForm from './components/AddForm';
-import TodoList from './components/TodoList';
-import styled from 'styled-components';
+import Router from './shared/Router';
 
 const App = () => {
-  return (
-    <StContainer className={styles.wrap}>
-      <h1>REDUX TODO APP</h1>
-      <AddForm />
-      <TodoList />
-    </StContainer>
-  );
+  return <Router />;
 };
 
 export default App;
-
-const StContainer = styled.section`
-  min-width: 800px;
-  margin: 0 auto;
-`;

@@ -3,23 +3,23 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   todos: [
     {
-      id: 1,
+      id: new Date().getTime(),
       title: 'react를 배워봅시다.'
     },
     {
-      id: 2,
+      id: new Date().getTime() + 1,
       title: 'redux를 배워봅시다.'
     },
     {
-      id: 3,
+      id: new Date().getTime() + 2,
       title: 'todoList를 만들어 봅시다.'
     },
     {
-      id: 4,
+      id: new Date().getTime() + 3,
       title: '잘 이해해 봅시다.'
     },
     {
-      id: 5,
+      id: new Date().getTime() + 4,
       title: '과제를 시작해 봅시다.'
     }
   ]
@@ -27,7 +27,7 @@ const initialState = {
 
 // createSlice의 결과
 const todosSlice = createSlice({
-  name: 'todoList',
+  name: 'todos',
   initialState: initialState,
 
   reducers: {

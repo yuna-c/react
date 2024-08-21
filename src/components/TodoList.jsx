@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { StButton, StButtonBox, StTodo, StTodos } from './TodoListStyle';
 import { deleteTodo, toggleTodo } from '../redux/slices/todosSilce';
+import { useNavigate } from 'react-router-dom';
 // import { deleteTodo, toggleTodo } from '../redux/modules/todos';
 
 const TodoList = () => {
   const { todos } = useSelector((state) => state.todos);
-  console.log(`todosToolkit =>`, todos);
+  // console.log(`todosToolkit =>`, todos);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // handler
   const onDeleteHandler = (id) => {
@@ -15,6 +17,10 @@ const TodoList = () => {
 
   const onToggleHandler = (id) => {
     dispatch(toggleTodo({ id }));
+  };
+
+  const onDetailButtonHandler = (id) => {
+    navigate(`/${id}`);
   };
 
   // TodoList, DoneList
@@ -51,6 +57,13 @@ const TodoList = () => {
                 >
                   삭제
                 </StButton>
+                <StButton
+                  onClick={() => {
+                    onDetailButtonHandler(todo.id);
+                  }}
+                >
+                  상세보기
+                </StButton>
               </StButtonBox>
             </StTodo>
           );
@@ -70,6 +83,13 @@ const TodoList = () => {
               <StButton color="red" onClick={() => onDeleteHandler(todo.id)}>
                 삭제
               </StButton>
+              <StButton
+                onClick={() => {
+                  onDetailButtonHandler(todo.id);
+                }}
+              >
+                상세보기
+              </StButton>
             </StButtonBox>
           </StTodo>
         ))}
@@ -77,4 +97,5 @@ const TodoList = () => {
     </>
   );
 };
+
 export default TodoList;
