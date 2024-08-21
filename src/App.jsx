@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import HeavyComponent from './components/HeavyComponent.jsx';
-import ObjectComponent from './components/ObjectComponent';
-import './styles/App.css';
+import styled from "styled-components";
+import HeavyComponent from "./components/HeavyComponent.jsx";
+import ObjectComponent from "./components/ObjectComponent";
+import "./styles/App.css";
 
 // 🌞🌞🌞🌞🌞
 // memoization
