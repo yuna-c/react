@@ -6,9 +6,18 @@ const initialState = {
 
 // 리듀서(변화를 일으키는 함수)
 const counter = (state = initialState, action) => {
+  // 🌞 6
+  console.log(`action=>`, action);
+
   switch (action.type /* action : type이라는 종류를 가진 객체 */) {
-    // case value:
-    //   break;
+    case 'PLUS_ONE':
+      return {
+        number: state.number + 1
+      };
+    case 'MINUS_ONE':
+      return {
+        number: state.number - 1
+      };
     default:
       return state;
   }
