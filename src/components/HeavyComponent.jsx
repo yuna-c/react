@@ -16,7 +16,7 @@ const HeavyComponent = () => {
   const sampleValue = useMemo(() => heavyWork(), []);
 
   return (
-    <div className='HeavyComponent'>
+    <div className="HeavyComponent">
       <p>HeavyComponent</p>
       <p>나는 {sampleValue}를 가져오는 엄청 무거운 작업을 하는 컴포넌트야</p>
       <button
