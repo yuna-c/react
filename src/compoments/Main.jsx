@@ -1,4 +1,3 @@
-import './main.scss';
 const main = () => {
   return (
     <main className="main">
