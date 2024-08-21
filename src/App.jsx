@@ -2,7 +2,8 @@ import './styles/App.css';
 import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addNumber, removeNumber } from './redux/modules/counter';
+// import { addNumber, removeNumber } from './redux/modules/counter';
+import { addNumber, removeNumber } from './redux/slices/counterSlice';
 
 // 🌞🌞🌞🌞🌞
 // - RTK(Redux ToolKit)
@@ -21,7 +22,7 @@ const App = () => {
     return state.counter.number;
   });
 
-  console.log(`counterReducer=>`, counterReducer);
+  console.log(`counterReducerToolkit=>`, counterReducer);
 
   const onChangeHandler = (e) => {
     const { value } = e.target;
