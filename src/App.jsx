@@ -4,6 +4,7 @@ import './styles/App.css'
 
 import PromiseExam from './components/promise/PromiseExam'
 import PromiseUseEffect from './components/promise/PromiseUseEffect'
+import PromiseData from './components/promise/PromiseData'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       {/* Promise */}
       <PromiseExam />
       <PromiseUseEffect />
+      <PromiseData />
     </>
   )
 }
