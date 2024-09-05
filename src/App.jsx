@@ -1,10 +1,12 @@
 import './styles/App.css'
 import Async from './components/Async'
+import AsyncUseEffect from './components/AsyncUseEffect'
 
 const App = () => {
   return (
     <>
       <Async />
+      <AsyncUseEffect />
     </>
   )
 }
