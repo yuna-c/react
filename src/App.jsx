@@ -5,6 +5,7 @@ import './styles/App.css'
 import PromiseExam from './components/promise/PromiseExam'
 import PromiseUseEffect from './components/promise/PromiseUseEffect'
 import PromiseData from './components/promise/PromiseData'
+import PromiseAllData from './components/promise/PromiseAllData'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <PromiseExam />
       <PromiseUseEffect />
       <PromiseData />
+      <PromiseAllData />
     </>
   )
 }
@@ -48,4 +50,6 @@ export default App
 // 대기(Pending) : 이행되거나 거부되지 않은 초기 상태(resolve나 reject로 인해 다른 상태로 변경되기 전까지의 상태)
 // 이행(Fulfilled) : 비동기 작업이 성공적으로 완료된 상태( resolve로 인해 pending 상태에서 fulfilled 상태로 변경)
 // 거부(Rejected) : 비동기 작업이 실패한 상태, reject로 인해 pending 상태에서 rejected 상태로 변경
-// Promise 객체는 then, catch, finally 메서드를 통해 이행되거나 거부된 이후의 동작을 정
+// Promise 객체는 then, catch, finally 메서드를 통해 이행되거나 거부된 이후의 동작
+
+// - Promise
