@@ -6,6 +6,8 @@ import PromiseExam from './components/promise/PromiseExam'
 import PromiseUseEffect from './components/promise/PromiseUseEffect'
 import PromiseData from './components/promise/PromiseData'
 import PromiseAllData from './components/promise/PromiseAllData'
+import Async from './components/asyncAwait/Async'
+import AsyncAWaitTryCatch from './components/asyncAwait/AsyncAWaitTryCatch'
 
 const App = () => {
   return (
@@ -15,10 +17,14 @@ const App = () => {
       <AsyncUseEffect /> */}
 
       {/* Promise */}
-      <PromiseExam />
+      {/* <PromiseExam />
       <PromiseUseEffect />
       <PromiseData />
-      <PromiseAllData />
+      <PromiseAllData /> */}
+
+      {/* async/await */}
+      <Async />
+      <AsyncAWaitTryCatch />
     </>
   )
 }
@@ -52,4 +58,14 @@ export default App
 // 거부(Rejected) : 비동기 작업이 실패한 상태, reject로 인해 pending 상태에서 rejected 상태로 변경
 // Promise 객체는 then, catch, finally 메서드를 통해 이행되거나 거부된 이후의 동작
 
-// - Promise
+// 🌞🌞🌞🌞🌞
+
+// - async/await
+// async 함수는 항상 Promise를 반환
+// await 키워드는 Promise가 이행될 때까지 기다림
+// 비동기 코드를 더 동기 코드처럼
+
+// - async/await 사용 이유
+// 가독성: async / await 구문을 사용하면 비동기 코드를 동기 코드처럼 작성할 수 있음
+// 에러 처리: try...catch 구문을 사용하여 비동기 작업에서 발생하는 오류를 간편하게 처리
+// 코드의 간결함: 콜백 지옥이나 체이닝을 피함
