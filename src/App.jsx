@@ -8,6 +8,8 @@ import PromiseData from './components/promise/PromiseData'
 import PromiseAllData from './components/promise/PromiseAllData'
 import Async from './components/asyncAwait/Async'
 import AsyncAWaitTryCatch from './components/asyncAwait/AsyncAWaitTryCatch'
+import Http from './components/http/Http'
+import Post from './components/http/Post'
 
 const App = () => {
   return (
@@ -23,8 +25,12 @@ const App = () => {
       <PromiseAllData /> */}
 
       {/* async/await */}
-      <Async />
-      <AsyncAWaitTryCatch />
+      {/* <Async />
+      <AsyncAWaitTryCatch /> */}
+
+      {/* HTTP */}
+      <Http />
+      <Post />
     </>
   )
 }

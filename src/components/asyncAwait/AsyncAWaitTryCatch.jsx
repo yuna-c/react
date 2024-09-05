@@ -17,7 +17,13 @@ function AsyncAWaitTryCatch() {
     fetchPost()
   }, [])
 
-  return <div>{post ? <div>{post.title}</div> : <div>Loading...</div>}</div>
+  return (
+    <div>
+      {post ? <div>{post.title}</div> : <div>Loading...</div>}
+      {post ? <div>{post.title}</div> : <div>Loading...</div>}
+      {post ? <div>{post.title}</div> : <div>Loading...</div>}
+    </div>
+  )
 }
 
 export default AsyncAWaitTryCatch
