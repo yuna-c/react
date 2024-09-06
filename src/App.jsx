@@ -1,6 +1,6 @@
+import axiosInstance from './api/api'
 import './styles/App.css'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 
 // https://axios-http.com/kr/docs/req_config
 // axios.get(url[, config]) : GET(url은 매개변수, 대괄호([])
@@ -16,41 +16,46 @@ const App = () => {
   // console.log('SERVER Url:', server)
   // console.log('SECRET Key:', secret)
 
+  // todo init
+  const [todos, setTodos] = useState(null)
+
   // newTodo
   const [todo, setTodo] = useState({
     title: ''
   })
-
-  const [todos, setTodos] = useState(null)
-
-  // 🔥 axios get
-  const fetchTodos = async () => {
-    const { data } = await axios.get('http://localhost:4000/todos')
-    setTodos(data)
-  }
-
-  // 🔥 axios post
-  const postTodos = async (todo) => {
-    await axios.post('http://localhost:4000/todos', todo)
-  }
-
-  // 🔥 axios delete
-  const deleteTodos = (todoId) => {
-    axios.delete(`http://localhost:4000/todos/${todoId}`)
-  }
 
   // 🔥 axios patch에서 사용할 id, 수정값의 state를 추가
   const [targetId, setTargetId] = useState(null)
   const [editTodo, setEditTodo] = useState({
     title: ''
   })
+
+  // 🔥 axios get
+  const fetchTodos = async () => {
+    const { data } = await axiosInstance.get('/todos')
+    setTodos(data)
+  }
+
+  // 🔥 axios post
+  const postTodos = async (todo) => {
+    await axiosInstance.post('/todos', todo)
+    fetchTodos()
+  }
+
+  // 🔥 axios delete
+  const deleteTodos = (todoId) => {
+    axiosInstance.delete(`/todos/${todoId}`)
+    fetchTodos()
+  }
+
   // 🔥 axios patch
   const patchTodos = (todoId, edit) => {
-    console.log('Todo ID:', todoId)
-    console.log('Edit Todo:', edit)
-    console.log('API URL:', `http://localhost:4000/todos/${todoId}`)
+    // console.log('Todo ID:', todoId)
+    // console.log('Edit Todo:', edit)
+    // console.log('API URL:', `http://localhost:4000/todos/${todoId}`)
     //  404 => json 서버 꺼짐
-    axios.patch(`http://localhost:4000/todos/${todoId}`, edit)
+    axiosInstance.patch(`/todos/${todoId}`, edit)
+    fetchTodos()
   }
 
   // 🔥 fetch : JSON.stringify를 '직접' body에 추가
