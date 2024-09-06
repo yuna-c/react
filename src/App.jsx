@@ -1,4 +1,4 @@
-import axiosInstance from './api/api'
+import api from './axios/api'
 import './styles/App.css'
 import { useEffect, useState } from 'react'
 
@@ -25,7 +25,7 @@ const App = () => {
   // 🔥 axios get
   const fetchTodos = async (todo) => {
     try {
-      const { data } = await axiosInstance.get('/todos', todo)
+      const { data } = await api.get('/todos', todo)
       setTodos(data)
     } catch (error) {
       console.error(
@@ -33,26 +33,13 @@ const App = () => {
         'color: #f0637b;',
         'color: #f0637b; font-weight: bold;'
       )
-      // 🔥 에러 핸들링
-      if (error.response) {
-        // 서버가 4xx, 5xx 응답을 반환했을 때
-        console.error('서버 오류:', error.response.data)
-        console.error('상태 코드:', error.response.status)
-        console.error('헤더:', error.response.headers)
-      } else if (error.request) {
-        // 요청이 전송되었으나 응답을 받지 못한 경우
-        console.error('응답 없음:', error.request)
-      } else {
-        // 요청 설정 중에 발생한 기타 오류
-        console.error('요청 오류:', error.message)
-      }
     }
   }
 
   // 🔥 axios post
   const postTodos = async (todo) => {
     try {
-      const { data } = await axiosInstance.post('/todos', todo)
+      const { data } = await api.post('/todos', todo)
       console.log('data =>', data)
 
       setTodos([...todos, data]) // 배열로 펼쳐서 리랜더링
@@ -69,7 +56,7 @@ const App = () => {
   // 🔥 axios delete
   const deleteTodos = async (id) => {
     try {
-      await axiosInstance.delete(`/todos/${id}`)
+      await api.delete(`/todos/${id}`)
       setTodos(todos.filter((todo) => todo.id !== id))
     } catch (error) {
       console.error(
@@ -86,15 +73,14 @@ const App = () => {
     console.log('API URL:', `http://localhost:4000/todos/${targetId}`)
 
     try {
-      await axiosInstance.patch(`/todos/${targetId}`, editTodo) // targetId가 어떻게 바뀔 것인지
+      await api.patch(`/todos/${targetId}`, editTodo) // targetId가 어떻게 바뀔 것인지
 
       // 수정된 데이터를 todos 배열에 반영하여 리렌더링 유도
       const newTodos = todos.map((todo) => (todo.id === targetId ? { ...todo, title: editTodo.title } : todo))
 
-      // 리랜더링 후 상태를 초기화
-      setTodos(newTodos)
-      setEditTodo({ title: '' })
-      setTargetId(null)
+      setTodos(newTodos) // 수정된 데이터를 반영하여 갱신
+      setEditTodo({ title: '' }) // 입력 필드를 초기화
+      setTargetId(null) // 수정할 ID를 초기화
     } catch (error) {
       console.error(
         `%c할 일을 수정하는 중 오류 발생 : %c${error}`,
