@@ -17,7 +17,7 @@ const App = () => {
   // console.log('SECRET Key:', secret)
 
   // todo init
-  const [todos, setTodos] = useState(null)
+  const [todos, setTodos] = useState([])
 
   // newTodo
   const [todo, setTodo] = useState({
@@ -32,20 +32,32 @@ const App = () => {
 
   // 🔥 axios get
   const fetchTodos = async () => {
-    const { data } = await axiosInstance.get('/todos')
-    setTodos(data)
+    try {
+      const { data } = await axiosInstance.get('/todos')
+      setTodos(data)
+    } catch (error) {
+      console.error('%c할 일 목록을 가져오는 중 오류 발생:%c', error, 'color: #f0637b;')
+    }
   }
 
   // 🔥 axios post
   const postTodos = async (todo) => {
-    await axiosInstance.post('/todos', todo)
-    fetchTodos()
+    try {
+      await axiosInstance.post('/todos', todo)
+      fetchTodos()
+    } catch (error) {
+      console.error('%c할 일을 추가하는 중 오류 발생:%c', error, 'color: #f0637b;')
+    }
   }
 
   // 🔥 axios delete
   const deleteTodos = (todoId) => {
-    axiosInstance.delete(`/todos/${todoId}`)
-    fetchTodos()
+    try {
+      axiosInstance.delete(`/todos/${todoId}`)
+      fetchTodos()
+    } catch (error) {
+      console.error('%c할 일을 제거하는 중 오류 발생:%c', error, 'color: #f0637b;')
+    }
   }
 
   // 🔥 axios patch
@@ -54,8 +66,12 @@ const App = () => {
     // console.log('Edit Todo:', edit)
     // console.log('API URL:', `http://localhost:4000/todos/${todoId}`)
     //  404 => json 서버 꺼짐
-    axiosInstance.patch(`/todos/${todoId}`, edit)
-    fetchTodos()
+    try {
+      axiosInstance.patch(`/todos/${todoId}`, edit)
+      fetchTodos()
+    } catch (error) {
+      console.error('%c할 일을 수정하는 중 오류 발생:%c' + error, 'color: #f0637b;')
+    }
   }
 
   // 🔥 fetch : JSON.stringify를 '직접' body에 추가

@@ -8,4 +8,18 @@ const axiosInstance = axios.create({
   // headers: { 'X-Custom-Header': 'foobar' }
 })
 
+// 요청 인터셉터 설정 : 요청/응답 가로채서 전처리/후처리 (인증토큰 추가/ 오류 일괄처리 등)
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token') // 로컬 스토리지에서 토큰 가져오기
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}` // 모든 요청에 Authorization 헤더 추가
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
 export default axiosInstance
