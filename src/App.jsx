@@ -1,7 +1,15 @@
-import './styles/App.css';
+import Async from './components/async'
+import './styles/App.css'
+
+// 🌞🌞🌞🌞🌞
+// TanStack Query
 
 const App = () => {
-  return <></>;
-};
+  return (
+    <>
+      <Async />
+    </>
+  )
+}
 
-export default App;
+export default App
