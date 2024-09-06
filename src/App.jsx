@@ -5,6 +5,7 @@ import axios from 'axios'
 // https://axios-http.com/kr/docs/req_config
 // axios.get(url[, config]) : GET(url은 매개변수, 대괄호([])
 // axios.post(url[, data[, config]]) : POST : 서버에 데이터를 추가할 때 사용, body
+// axios.delete(url[, config]) : DELETE는 저장되어 있는 데이터를 삭제
 
 const App = () => {
   const apiKey = import.meta.env.VITE_API_KEY
@@ -20,14 +21,20 @@ const App = () => {
 
   const [todos, setTodos] = useState(null)
 
-  // 🔥 axios
+  // 🔥 axios get
   const fetchTodos = async () => {
     const { data } = await axios.get('http://localhost:4000/todos')
     setTodos(data)
   }
 
+  // 🔥 axios post
   const postTodos = async (todo) => {
     await axios.post('http://localhost:4000/todos', todo)
+  }
+
+  // 🔥 axios delete
+  const deleteTodos = (todoId) => {
+    axios.delete(`http://localhost:4000/todos/${todoId}`)
   }
 
   // 🔥 fetch : JSON.stringify를 '직접' body에 추가
@@ -67,7 +74,12 @@ const App = () => {
       </form>
       <div>
         {todos?.map((todo) => (
-          <div key={todo.id}>{todo.title}</div>
+          <div key={todo.id}>
+            {todo.title}
+            <button type="button" onClick={() => deleteTodos(todo.id)}>
+              삭제하기
+            </button>
+          </div>
         ))}
       </div>
     </>
