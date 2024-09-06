@@ -11,35 +11,28 @@ import { useEffect, useState } from 'react'
 // 구형 브라우저 지원 : axios
 // 신형 브라우저 지원 : fetch
 
+//  404 => json 서버 꺼짐
+
 const App = () => {
-  // const apiKey = import.meta.env.VITE_API_KEY
-  // const server = import.meta.env.VITE_EXAMPLE_SERVER_URL
-  // const secret = import.meta.env.VITE_SECRET_KEY
-  // console.log('API Key:', apiKey)
-  // console.log('SERVER Url:', server)
-  // console.log('SECRET Key:', secret)
-
-  // todo init
-  const [todos, setTodos] = useState([])
-
-  // newTodo
-  const [todo, setTodo] = useState({
-    title: ''
-  })
+  // 🔥 todo init 데이터, newTodo input 관리용
+  const [todos, setTodos] = useState(null)
+  const [todo, setTodo] = useState({ title: '' })
 
   // 🔥 axios patch에서 사용할 id, 수정값의 state를 추가
   const [targetId, setTargetId] = useState(null)
-  const [editTodo, setEditTodo] = useState({
-    title: ''
-  })
+  const [editTodo, setEditTodo] = useState({ title: '' })
 
   // 🔥 axios get
-  const fetchTodos = async () => {
+  const fetchTodos = async (todo) => {
     try {
-      const { data } = await axiosInstance.get('/todos')
+      const { data } = await axiosInstance.get('/todos', todo)
       setTodos(data)
     } catch (error) {
-      console.error('%c할 일 목록을 가져오는 중 오류 발생:%c', error, 'color: #f0637b;')
+      console.error(
+        `%c할 일 목록을 가져오는 중 오류 발생 : %c${error}`,
+        'color: #f0637b;',
+        'color: #f0637b; font-weight: bold;'
+      )
       // 🔥 에러 핸들링
       if (error.response) {
         // 서버가 4xx, 5xx 응답을 반환했을 때
@@ -59,36 +52,61 @@ const App = () => {
   // 🔥 axios post
   const postTodos = async (todo) => {
     try {
-      await axiosInstance.post('/todos', todo)
-      fetchTodos()
+      const { data } = await axiosInstance.post('/todos', todo)
+      console.log('data =>', data)
+
+      setTodos([...todos, data]) // 배열로 펼쳐서 리랜더링
+      setTodo({ title: '' })
     } catch (error) {
-      console.error('%c할 일을 추가하는 중 오류 발생:%c', error, 'color: #f0637b;')
+      console.error(
+        `%c할 일을 추가하는 중 오류 발생 : %c${error}`,
+        'color: #f0637b;',
+        'color: #f0637b; font-weight: bold;'
+      )
     }
   }
 
   // 🔥 axios delete
-  const deleteTodos = (todoId) => {
+  const deleteTodos = async (id) => {
     try {
-      axiosInstance.delete(`/todos/${todoId}`)
-      fetchTodos()
+      await axiosInstance.delete(`/todos/${id}`)
+      setTodos(todos.filter((todo) => todo.id !== id))
     } catch (error) {
-      console.error('%c할 일을 제거하는 중 오류 발생:%c', error, 'color: #f0637b;')
+      console.error(
+        `%c할 일을 제거하는 중 오류 발생 : %c${error}`,
+        'color: #f0637b;',
+        'color: #f0637b; font-weight: bold;'
+      )
     }
   }
 
   // 🔥 axios patch
-  const patchTodos = (todoId, edit) => {
-    // console.log('Todo ID:', todoId)
-    // console.log('Edit Todo:', edit)
-    // console.log('API URL:', `http://localhost:4000/todos/${todoId}`)
-    //  404 => json 서버 꺼짐
+  const patchTodos = async (targetId, editTodo) => {
+    console.log('Todo ID =>', targetId, 'Edit Todo =>', editTodo)
+    console.log('API URL:', `http://localhost:4000/todos/${targetId}`)
+
     try {
-      axiosInstance.patch(`/todos/${todoId}`, edit)
-      fetchTodos()
+      await axiosInstance.patch(`/todos/${targetId}`, editTodo) // targetId가 어떻게 바뀔 것인지
+
+      // 수정된 데이터를 todos 배열에 반영하여 리렌더링 유도
+      const newTodos = todos.map((todo) => (todo.id === targetId ? { ...todo, title: editTodo.title } : todo))
+
+      // 리랜더링 후 상태를 초기화
+      setTodos(newTodos)
+      setEditTodo({ title: '' })
+      setTargetId(null)
     } catch (error) {
-      console.error('%c할 일을 수정하는 중 오류 발생:%c' + error, 'color: #f0637b;')
+      console.error(
+        `%c할 일을 수정하는 중 오류 발생 : %c${error}`,
+        'color: #f0637b;',
+        'color: #f0637b; font-weight: bold;'
+      )
     }
   }
+
+  useEffect(() => {
+    fetchTodos()
+  }, [])
 
   // 🔥 fetch : JSON.stringify를 '직접' body에 추가
   // await fetch("http://localhost:4000/todos", {
@@ -99,29 +117,23 @@ const App = () => {
   //   body: JSON.stringify(todo),
   // });
 
-  useEffect(() => {
-    fetchTodos()
-  }, [])
-
-  console.log('todos=> ', todos)
+  // console.log('todos=> ', todos)
 
   return (
     <>
+      <h1>axios CRUD</h1>
       <form
         onSubmit={(e) => {
-          // 👇 submit했을 때 브라우저의 새로고침을 방지합니다.
           e.preventDefault()
           postTodos(todo)
         }}
       >
         <input
           type="text"
-          onChange={(ev) => {
-            const { value } = ev.target
-            setTodo({
-              ...todo,
-              title: value
-            })
+          value={todo.title}
+          onChange={(e) => {
+            const { value } = e.target
+            setTodo({ ...todo, title: value })
           }}
         />
         <button>추가하기</button>
@@ -130,25 +142,20 @@ const App = () => {
           <input
             type="text"
             placeholder="수정하고싶은 Todo ID"
-            onChange={(ev) => {
-              setTargetId(ev.target.value)
+            value={targetId || ''}
+            onChange={(e) => {
+              setTargetId(e.target.value)
             }}
           />
           <input
             type="text"
             placeholder="수정값 입력"
-            onChange={(ev) => {
-              setEditTodo({
-                ...editTodo,
-                title: ev.target.value
-              })
+            value={editTodo.title}
+            onChange={(e) => {
+              setEditTodo({ ...editTodo, title: e.target.value })
             }}
           />
-          <button
-            // type='button' 을 추가해야 form의 영향에서 벗어남
-            type="button"
-            onClick={() => patchTodos(targetId, editTodo)}
-          >
+          <button type="button" onClick={() => patchTodos(targetId, editTodo)}>
             수정하기
           </button>
         </fieldset>
