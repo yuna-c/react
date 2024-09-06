@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react'
 // axios.delete(url[, config]) : DELETE는 저장되어 있는 데이터를 삭제
 // axios.patch(url[, data[, config]]) : Patch 업데이트
 
+// 구형 브라우저 지원 : axios
+// 신형 브라우저 지원 : fetch
+
 const App = () => {
   // const apiKey = import.meta.env.VITE_API_KEY
   // const server = import.meta.env.VITE_EXAMPLE_SERVER_URL
