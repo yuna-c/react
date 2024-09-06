@@ -37,6 +37,19 @@ const App = () => {
       setTodos(data)
     } catch (error) {
       console.error('%c할 일 목록을 가져오는 중 오류 발생:%c', error, 'color: #f0637b;')
+      // 🔥 에러 핸들링
+      if (error.response) {
+        // 서버가 4xx, 5xx 응답을 반환했을 때
+        console.error('서버 오류:', error.response.data)
+        console.error('상태 코드:', error.response.status)
+        console.error('헤더:', error.response.headers)
+      } else if (error.request) {
+        // 요청이 전송되었으나 응답을 받지 못한 경우
+        console.error('응답 없음:', error.request)
+      } else {
+        // 요청 설정 중에 발생한 기타 오류
+        console.error('요청 오류:', error.message)
+      }
     }
   }
 
