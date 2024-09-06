@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './styles/index.css'
@@ -8,7 +8,6 @@ import './styles/index.css'
 // yarn add axios
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  // <StrictMode></StrictMode>
+  <App />
 )
