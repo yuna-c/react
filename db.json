@@ -3,26 +3,31 @@
     {
       "id": "1",
       "title": "a title",
+      "isDone": true,
       "views": 100
     },
     {
       "id": "2",
       "title": "another title",
+      "isDone": false,
       "views": 200
     },
     {
       "id": "4",
       "title": "스탠다드반 123",
+      "isDone": false,
       "views": 100000
     },
     {
       "id": "ae7a",
       "title": "테스트입니다",
+      "isDone": true,
       "views": "30000"
     },
     {
       "id": "0044",
       "title": "테스트11111",
+      "isDone": true,
       "views": "10"
     }
   ],
