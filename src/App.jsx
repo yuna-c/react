@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 // import Async from './components/async'
 import './styles/App.css'
@@ -14,8 +14,11 @@ import { useState } from 'react'
 
 // NOTE - useQuery : 데이터를 가져오기(쿼리 키와 비동기 함수(패칭 함수))
 // NOTE - useMutation : 데이터를 생성, 수정, 삭제하는 등의 작업에 사용되는 훅([비동기 작업]을 쉽게 처리한다는 말 안에는 [작업이 완료된 후에 관련된 쿼리를 무효화]하는 과정이 포함)
+// NOTE - invalidateQueries : 특정 쿼리를 무효화하여 데이터를 다시 패칭하게 하는 함수, 데이터가 항상 최신 상태로 유지, 새로운 할 일을 추가한 후 기존의 할 일 목록을 다시 가져오도록
 
 const App = () => {
+  const queryClient = useQueryClient()
+
   const [todoItem, setTodoItem] = useState('')
 
   const fetchTodos = async () => {
@@ -37,7 +40,11 @@ const App = () => {
   })
 
   const { mutate } = useMutation({
-    mutationFn: addTodo
+    mutationFn: addTodo,
+    onSuccess: () => {
+      // alert("데이터 삽입이 성공했습니다.");
+      queryClient.invalidateQueries(['todos'])
+    }
   })
 
   if (isPending) {
