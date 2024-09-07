@@ -8,6 +8,7 @@ function App() {
   const bears = useBearsStore((state) => state.bears)
   const increasePopulation = useBearsStore((state) => state.increasePopulation)
 
+  // 선택적 상태 구독
   const todos = useTodosStore((state) => state.todos)
   const addTodo = useTodosStore((state) => state.addTodo)
   const removeTodo = useTodosStore((state) => state.removeTodo)
