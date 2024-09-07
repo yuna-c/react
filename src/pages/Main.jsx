@@ -17,11 +17,17 @@ function Main() {
     // queryFn: getTodos
 
     // 쿼리 요청이 진행 중일 때 사용자가 페이지를 벗어나거나 쿼리가 취소되면 axios 요청이 자동으로 취소
-    queryFn: ({ signal }) =>
-      axios.get('/todos', {
-        // Pass the signal to `axios`
-        signal
-      })
+    // queryFn: ({ signal }) =>
+    //   axios.get('/todos', {
+    //     // Pass the signal to `axios`
+    //     signal
+    //   })
+
+    // 수동으로 Query 취소
+    queryFn: async ({ signal }) => {
+      const resp = await fetch('/todos', { signal })
+      return resp.json()
+    }
   })
 
   // 취소 예시
@@ -31,6 +37,7 @@ function Main() {
   // console.log("isPending, isFetching:", isPending, isFetching);
   console.log('todos: ', todos) // undefined -> [{}, {}, {}]
 
+  // 수동으로 Query 취소
   const queryClient = useQueryClient()
 
   const addMutation = useMutation({
@@ -87,7 +94,7 @@ function Main() {
     <div>
       {console.log('Main return UI')}
       <h1>투두리스트 : shared</h1>
-
+      {/* 수동으로 쿼리 취소 */}
       <button style={{ display: 'block' }} onClick={cancelQuery}>
         todos 쿼리취소
       </button>
