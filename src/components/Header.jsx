@@ -39,6 +39,11 @@ const Header = () => {
           Sparta
         </Link>
       </h1>
+      <div className="text-sm">
+        <span className="block md:hidden lg:hidden">모바일 환경</span>
+        <span className="hidden md:block lg:hidden">태블릿 환경</span>
+        <span className="hidden md:hidden lg:block">데스크탑 환경</span>
+      </div>
       <nav
         style={{
           display: 'flex',
