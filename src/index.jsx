@@ -38,6 +38,15 @@ const queryClient = new QueryClient()
 // refetchOnWindowFocus : 윈도우가 focus를 잃었다가 다시 얻었을 때, 자동으로 refetch 하는지 확인
 // refetchOnReconnect : wifi를 껐다가 켜보세요. refetch가 일어나는지 확인
 
+// 🌞 gcTime(cacheTime)
+// const queryClient = new QueryClient({
+//   defaultOptions: {
+//     queries: {
+//       gcTime: 2000
+//     }
+//   }
+// })
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} />
