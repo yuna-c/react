@@ -12,9 +12,11 @@ function Main() {
     isFetching,
     data: todos
   } = useQuery({
+    // queryFn
     queryKey: ['todos'],
     queryFn: getTodos
   })
+  // example: <div onClick={(event) => {}}
   // console.log("isPending, isFetching:", isPending, isFetching);
   console.log('todos: ', todos) // undefined -> [{}, {}, {}]
 
@@ -25,6 +27,8 @@ function Main() {
     // onSuccess: () => {
     //   queryClient.invalidateQueries(["todos"]);
     // },
+
+    // 🌞 Query Cancellation : 낙관적 업데이트 시
     onMutate: async (newTodo) => {
       console.log('onMutate 호출')
       await queryClient.cancelQueries({ queryKey: ['todos'] })
@@ -35,12 +39,14 @@ function Main() {
 
       return { previousTodos }
     },
+    // 🌞 에러 시 원복 처리
     onError: (err, newTodo, context) => {
       console.log('onError')
       console.log('context:', context)
+      // 에러가 나면 쿼리데이터를 다시 셋하고 원래 가지고 있던 previousTodos로 원복
       queryClient.setQueryData(['todos'], context.previousTodos)
     },
-
+    // 🌞invalidateQueries 처리로 무효화하고 새로운 데이터를 가져오게 강제함
     onSettled: () => {
       console.log('onSettled')
       queryClient.invalidateQueries({ queryKey: ['todos'] })
@@ -82,7 +88,7 @@ function Main() {
       <ul>
         {todos?.map((todo, idx) => (
           //  todo.id가 없을 경우 idx 사용
-          <li id={todo.id} key={todo.id || idx}>
+          <li id={todo.id} key={todo.id || todo.id + idx}>
             <div style={{ width: 300, display: 'flex', gap: 20 }}>
               <span>
                 {idx}: {todo.content}
