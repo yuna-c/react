@@ -127,7 +127,7 @@
 // 🌞 LifeCycle
 // TanStack Query의 생명주기는 데이터가 캐시되고, 사용되고, 갱신되는 과정
 
-// TanStack Query의 생명주기
+// 🌞 TanStack Query의 생명주기
 // ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/bd3f993b-c490-4373-b7b4-9d97e672948c/Untitled.png)
 
 // | 상태 | 설명 |
@@ -139,7 +139,7 @@
 // | deleted | 캐시에서 제거된 쿼리 상태입니다. `gcTime` 이 지나면 쿼리가 캐시에서 삭제되어 이 상태가 됩니다. |
 // | fetching | 데이터를 서버에서 가져오고 있는 상태입니다. 이 상태에서는 `isFetching`이 true로 설정됩니다. |
 
-// default config(기본 설정)
+// 🌞 default config(기본 설정)
 // | 기본 설정 | 의미 |
 // | --- | --- |
 // | staleTime: 0 | useQuery 또는 useInfiniteQuery에 등록된 queryFn 을 통해 fetch 받아온 데이터는 항상 stale data 취급 |
