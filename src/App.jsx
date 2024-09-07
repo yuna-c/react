@@ -5,8 +5,9 @@ import useBearsStore from './zustand/bearsStore'
 import useTodosStore from './zustand/todosStore'
 
 function App() {
-  const bears = useBearsStore((state) => state.bears)
-  const increasePopulation = useBearsStore((state) => state.increasePopulation)
+  // const bears = useBearsStore((state) => state.bears)
+  // const increase = useBearsStore((state) => state.increase)
+  const { bears, increase, init } = useBearsStore((state) => state)
 
   // 선택적 상태 구독
   const todos = useTodosStore((state) => state.todos)
@@ -18,7 +19,8 @@ function App() {
     <>
       <div>
         <h1>{bears} around here ...</h1>
-        <button onClick={increasePopulation}>one up</button>
+        <button onClick={increase}>one up</button>
+        <button onClick={init}>init</button>
       </div>
       <div>
         <h1>Todo List</h1>
