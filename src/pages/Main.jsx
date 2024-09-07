@@ -14,7 +14,7 @@ function Main() {
   } = useQuery({
     // queryFn
     queryKey: ['todos'],
-    // queryFn: getTodos
+    queryFn: getTodos
 
     // 쿼리 요청이 진행 중일 때 사용자가 페이지를 벗어나거나 쿼리가 취소되면 axios 요청이 자동으로 취소
     // queryFn: ({ signal }) =>
@@ -24,10 +24,10 @@ function Main() {
     //   })
 
     // 수동으로 Query 취소
-    queryFn: async ({ signal }) => {
-      const resp = await fetch('/todos', { signal })
-      return resp.json()
-    }
+    // queryFn: async ({ signal }) => {
+    //   const resp = await fetch('/todos', { signal })
+    //   return resp.json()
+    // }
   })
 
   // 취소 예시
@@ -43,8 +43,8 @@ function Main() {
   const addMutation = useMutation({
     mutationFn: addTodo,
     // onSuccess: () => {
-    //   queryClient.invalidateQueries(["todos"]);
-    // },
+    //   queryClient.invalidateQueries(['todos'])
+    // }
 
     // 🔥 Query Cancellation : 낙관적 업데이트 시
     onMutate: async (newTodo) => {
@@ -82,7 +82,8 @@ function Main() {
   }
 
   const cancelQuery = () => {
-    queryClient.cancelQueries(['todos'])
+    console.log('쿼리 취소 호출됨')
+    queryClient.cancelQueries({ queryKey: ['todos'] })
   }
 
   if (isPending) {

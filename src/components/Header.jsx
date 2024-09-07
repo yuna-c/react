@@ -6,26 +6,14 @@ export default function Header() {
   const { pathname } = useLocation()
 
   const queryClient = useQueryClient()
-
-  // 🔥 Prefetching
   const onMouseOver = () => {
     if (pathname !== '/') return
-    // The results of this query will be cached like a normal query
-    // prefetch 할 queryKey와 queryFn 은 이동할 페이지의 쿼리와 동일해야 적절합니다.
+
     queryClient.prefetchQuery({
       queryKey: ['movies', 1],
       queryFn: fetchMovieData
     })
   }
-
-  // const prefetchTodos = async () => {
-  //   // The results of this query will be cached like a normal query
-  //   // prefetch 할 queryKey와 queryFn 은 이동할 페이지의 쿼리와 동일해야 적절합니다.
-  //   await queryClient.prefetchQuery({
-  //     queryKey: ['todos'],
-  //     queryFn: fetchTodos
-  //   })
-  // }
   return (
     <div
       style={{
