@@ -1,30 +1,32 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { fetchMovieData } from "../api/movie";
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { fetchMovieData } from '../api/movie'
 
 export default function MovieFetchMore() {
   const {
     data: movies,
     hasNextPage,
-    fetchNextPage,
+    fetchNextPage
+    // 무한 스크롤, 더보기 UI 용 훅
   } = useInfiniteQuery({
-    queryKey: ["movies"],
+    queryKey: ['movies'],
     queryFn: fetchMovieData,
+    // getNextPageParam
     getNextPageParam: (lastPage) => {
-      console.log("lastPage: ", lastPage);
+      console.log('lastPage(현재 페이지): ', lastPage)
       if (lastPage.page < lastPage.total_pages) {
-        return lastPage.page + 1;
+        return lastPage.page + 1
       }
     },
     select: (data) => {
-      return data.pages.map((pageData) => pageData.results).flat();
-    },
-  });
-  console.log("movies: ", movies);
+      return data.pages.map((pageData) => pageData.results).flat()
+    }
+  })
+  console.log('movies: ', movies)
 
   const fetchMore = () => {
-    if (!hasNextPage) return;
-    fetchNextPage();
-  };
+    if (!hasNextPage) return
+    fetchNextPage()
+  }
 
   return (
     <div>
@@ -35,9 +37,9 @@ export default function MovieFetchMore() {
           <li key={movie.id}>{movie.title}</li>
         ))}
       </ul>
-      <button style={{ width: "100%" }} onClick={fetchMore}>
+      <button style={{ width: '100%' }} onClick={fetchMore}>
         더보기
       </button>
     </div>
-  );
+  )
 }
