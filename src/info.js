@@ -148,3 +148,19 @@
 // | refetchOnReconnect: true | Network 가 끊겼다가 재연결 되었을 때 stale data를 refetch 자동 실행 |
 // | gcTime(cacheTime): 5분 (1000 * 60 * 5 ms) | useQuery 또는 useInfiniteQuery가 있는 컴포넌트가 언마운트 되었을 때 inactive query라 부르며, inactive 상태가 5분 경과 후 GC(가비지콜렉터)에 의해 cache data 삭제 처리 |
 // | retry: 3 | useQuery 또는 useInfiniteQuery에 등록된 queryFn 이 API 서버에 요청을 보내서 실패하더라도 바로 에러를 띄우지 않고 총 3번까지 재요청을 자동으로 시도 |
+
+// 🌞 헷갈리는 개념 정리
+// staleTime vs gcTime
+// staleTime : 얼마의 시간이 흐른 뒤에 stale 취급할 건지 (default: 0)
+// gcTime : inactive 된 이후로 메모리에 얼마만큼 있을건지 (default: 5분, gcTime 0되면 삭제처리)
+
+// staleTime 과 stale/fresh 의 관계
+// staleTime > 0 이면, fresh data
+// staleTime = 0 이면, stale data
+
+// isPending vs. isFetching
+// isPending : 새로운 캐시 데이터를 서버에서 받고 있는 지 여부
+// 캐시 데이터가 있는 경우 isPending은 false, isFetching은 true
+
+// isFetching: 서버에서 데이터를 받고 있는 지 여부
+// 메인페이지와 상세페이지가 모두 useQuery(”todos”, getTodos) 를 가질 때, 메인페이지 → 상세페이지 → 메인페이지 순으로 이동할 때 메인페이지 재 마운트 시의 isPending, isFetching 의 콘솔로그값은?

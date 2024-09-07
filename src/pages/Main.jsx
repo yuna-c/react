@@ -8,15 +8,20 @@ function Main() {
   const navigate = useNavigate()
 
   const {
-    isLoading,
-    isError,
+    isLoading, // 첫 로딩 중일 때 true
+    isError, // 에러 발생 시 true
+    isFetching, // 데이터를 refetching(재요청) 중일 때 true
     data: todos
   } = useQuery({
     queryKey: ['todos'],
-    queryFn: getTodos
+    queryFn: getTodos,
+    gcTime: 2000, // 🌞 gcTime(cacheTime)
+    retry: 10 // 🌞 retry
   })
-  // console.log("isLoading, isError:", isLoading, isError);
-  console.log('todos: ', todos) // undefined -> [{}, {}, {}]
+  // 상태 출력
+  console.log('isLoading, isError:', isLoading, isError)
+  console.log('todos: ', todos) // undefined일 수 있음, 데이터가 있으면 [{}, {}, {}] 형식
+  console.log('isFetching: ', isFetching) // 데이터를 새로 가져오는 중인지 여부
 
   const queryClient = useQueryClient()
 
@@ -40,6 +45,11 @@ function Main() {
   if (isLoading) {
     console.log('Main return Loading')
     return <h1>Loading...</h1>
+  }
+
+  if (isError) {
+    console.log('Error')
+    return <h1>isError...</h1>
   }
 
   return (
