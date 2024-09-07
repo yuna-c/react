@@ -33,7 +33,7 @@ function App() {
         <ul>
           {todos.map((todo, index) => (
             <li key={index}>
-              {todo} <button onClick={() => removeTodo(index)}>Remove</button>
+              {todo.title} <button onClick={() => removeTodo(index)}>Remove</button>
             </li>
           ))}
         </ul>
