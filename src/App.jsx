@@ -1,7 +1,11 @@
-import './styles/App.css';
+import React from "react";
+import SharedRouter from "./shared/Router";
+import { AuthProvider } from "./context/AuthContext";
 
-const App = () => {
-  return <></>;
-};
+const App = () => (
+  <AuthProvider>
+    <SharedRouter />
+  </AuthProvider>
+);
 
 export default App;

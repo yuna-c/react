@@ -11,3 +11,6 @@
 // yarn add immer
 
 // yarn add lodash
+
+// yarn add tailwindcss postcss autoprefixer
+// npx tailwindcss init -p
