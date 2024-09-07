@@ -15,8 +15,11 @@ function Main() {
   } = useQuery({
     queryKey: ['todos'],
     queryFn: getTodos,
-    gcTime: 2000, // 🌞 gcTime(cacheTime)
-    retry: 10 // 🌞 retry
+    select: (todos) => {
+      return todos.map((todo) => {
+        return { ...todo, test: 1 }
+      })
+    }
   })
   // 상태 출력
   console.log('isLoading, isError:', isLoading, isError)
@@ -31,7 +34,9 @@ function Main() {
       queryClient.invalidateQueries(['todos'])
     }
   })
-
+  console.log('==========================================================')
+  console.log('todos=>', todos)
+  console.log('==========================================================')
   const [content, setContent] = useState('')
 
   const handleChange = (e) => {
