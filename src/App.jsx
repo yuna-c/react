@@ -13,6 +13,7 @@ function App() {
   const todos = useTodosStore((state) => state.todos)
   const addTodo = useTodosStore((state) => state.addTodo)
   const removeTodo = useTodosStore((state) => state.removeTodo)
+  const toggleTodo = useTodosStore((state) => state.toggleTodo)
   const [input, setInput] = useState('')
 
   return (
@@ -36,7 +37,16 @@ function App() {
         <ul>
           {todos.map((todo, index) => (
             <li key={index}>
-              {todo.title} <button onClick={() => removeTodo(index)}>Remove</button>
+              <span
+                onClick={() => toggleTodo(todo.id)} // 완료 상태 토글
+                style={{
+                  textDecoration: todo.done ? 'line-through' : 'none', // 완료된 todo는 줄 그어짐
+                  cursor: 'pointer'
+                }}
+              >
+                {todo.title}
+              </span>
+              <button onClick={() => removeTodo(index)}>Remove</button>
             </li>
           ))}
         </ul>

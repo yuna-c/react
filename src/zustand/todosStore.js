@@ -122,7 +122,7 @@ const useTodosStore = create(
             if (todo) {
               const task = todo.tasks.find((task) => task.id === taskId)
               if (task) {
-                task.done = !task.done // immer로 불변성 유지: 직접 수정 가능
+                task.done = !task.done
               }
             }
           })
@@ -146,8 +146,18 @@ const useTodosStore = create(
           produce((state) => {
             state.todos.splice(index, 1) // immer로 불변성 유지
           })
+        ),
+      toggleTodo: (todoId) =>
+        set(
+          produce((state) => {
+            const todo = state.todos.find((todo) => todo.id === todoId)
+            if (todo) {
+              todo.done = !todo.done // 완료 상태를 토글
+            }
+          })
         )
     }),
+
     {
       name: 'todos-storage', // localStorage에 저장될 키 이름 설정
       getStorage: () => localStorage // localStorage에 저장하도록 설정 (필요 시 sessionStorage로 변경 가능)
