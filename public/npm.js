@@ -4,3 +4,4 @@
 // yarn add @tanstack/react-query @tanstack/react-query-devtools
 // yarn add react-router-dom
 // yarn add react-intersection-observer
+// yarn add zustand
