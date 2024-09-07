@@ -14,8 +14,19 @@ function Main() {
   } = useQuery({
     // queryFn
     queryKey: ['todos'],
-    queryFn: getTodos
+    // queryFn: getTodos
+
+    // 쿼리 요청이 진행 중일 때 사용자가 페이지를 벗어나거나 쿼리가 취소되면 axios 요청이 자동으로 취소
+    queryFn: ({ signal }) =>
+      axios.get('/todos', {
+        // Pass the signal to `axios`
+        signal
+      })
   })
+
+  // 취소 예시
+  // const { data, error } = useQuery('todos', ({ signal }) => axios.get('/todos', { signal }))
+
   // example: <div onClick={(event) => {}}
   // console.log("isPending, isFetching:", isPending, isFetching);
   console.log('todos: ', todos) // undefined -> [{}, {}, {}]
