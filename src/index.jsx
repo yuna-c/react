@@ -47,6 +47,15 @@ const queryClient = new QueryClient()
 //   }
 // })
 
+// 🌞 retry
+// const queryClient = new QueryClient({
+//   defaultOptions: {
+//     queries: {
+//       retry: 5
+//     }
+//   }
+// })
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} />

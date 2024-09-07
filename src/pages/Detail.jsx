@@ -14,7 +14,8 @@ export default function Detail() {
   } = useQuery({
     queryKey: ['todo', id], // 쿼리 키는 객체 내에서 queryKey로 전달
     queryFn: () => getTodo(id), // 쿼리 함수는 queryFn으로 전달 getTodo(id)
-    gcTime: 2000 // 🌞 gcTime(cacheTime)
+    gcTime: 2000, // 🌞 gcTime(cacheTime)
+    retry: 10 // 🌞 retry
   })
   console.log('todo: ', todo)
 
