@@ -58,6 +58,7 @@ function Main() {
       <h1>투두리스트</h1>
 
       <Link to={'/empty'}>빈 화면으로 이동</Link>
+
       <form onSubmit={handleSubmit} style={{ marginTop: 10 }}>
         <input value={content} onChange={handleChange} />
         <button>투두 추가</button>

@@ -79,5 +79,34 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "Project A"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "name": "Project B"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "name": "Project C"
+    }
+  ]
 }
