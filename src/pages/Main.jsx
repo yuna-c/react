@@ -46,7 +46,7 @@ function Main() {
     //   queryClient.invalidateQueries(["todos"]);
     // },
 
-    // 🌞 Query Cancellation : 낙관적 업데이트 시
+    // 🔥 Query Cancellation : 낙관적 업데이트 시
     onMutate: async (newTodo) => {
       console.log('onMutate 호출')
       await queryClient.cancelQueries({ queryKey: ['todos'] })
@@ -57,14 +57,14 @@ function Main() {
 
       return { previousTodos }
     },
-    // 🌞 에러 시 원복 처리
+    // 🔥 에러 시 원복 처리
     onError: (err, newTodo, context) => {
       console.log('onError')
       console.log('context:', context)
       // 에러가 나면 쿼리데이터를 다시 셋하고 원래 가지고 있던 previousTodos로 원복
       queryClient.setQueryData(['todos'], context.previousTodos)
     },
-    // 🌞invalidateQueries 처리로 무효화하고 새로운 데이터를 가져오게 강제함
+    // 🔥 invalidateQueries 처리로 무효화하고 새로운 데이터를 가져오게 강제함
     onSettled: () => {
       console.log('onSettled')
       queryClient.invalidateQueries({ queryKey: ['todos'] })
