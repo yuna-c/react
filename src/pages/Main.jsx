@@ -57,7 +57,9 @@ function Main() {
       {console.log('Main return UI')}
       <h1>투두리스트</h1>
 
-      <Link to={'/empty'}>빈 화면으로 이동</Link>
+      <button>
+        <Link to={'/empty'}>빈 화면으로 이동</Link>
+      </button>
 
       <form onSubmit={handleSubmit} style={{ marginTop: 10 }}>
         <input value={content} onChange={handleChange} />
