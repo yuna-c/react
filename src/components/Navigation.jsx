@@ -38,6 +38,17 @@ function Navigation() {
             Empty
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/select"
+            style={({ isActive }) => ({
+              color: isActive ? 'red' : 'blue',
+              textDecoration: isActive ? 'underline' : 'none'
+            })}
+          >
+            Select
+          </NavLink>
+        </li>
       </ul>
     </nav>
   )
